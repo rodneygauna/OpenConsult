@@ -21,18 +21,30 @@ class User(db.Model, UserMixin):
 
     __tablename__ = 'users'
 
+    # IDs
     id = db.Column(db.Integer, primary_key=True)
+    # Login Information
     email = db.Column(db.String(255), unique=True, index=True)
-    profile_image = db.Column(
-        db.String(20), nullable=False, default='default_profile.png')
     password_hash = db.Column(db.String(128))
+    # Timestamps
     created_date = db.Column(
         db.DateTime, nullable=False, default=datetime.utcnow)
     updated_date = db.Column(db.DateTime, default=datetime.utcnow)
+    # User Role
+    user_role = db.Column(db.String(10), default='STAFF')
+    # User Type
+    user_type = db.Column(db.String(10), default='USER')
+    # Status
+    status = db.Column(db.String(10), default='ACTIVE')
+    # Profile Picture
+    profile_image = db.Column(
+        db.String(255), nullable=False, default='default_profile.png')
+    # User Demographics
     firstname = db.Column(db.String(255))
     middlename = db.Column(db.String(255))
     lastname = db.Column(db.String(255))
-    status = db.Column(db.String(10), default='Active')
+    suffixname = db.Column(db.String(5))
+    credentials = db.Column(db.String(255))
 
     def __init__(self, email, password):
         self.email = email

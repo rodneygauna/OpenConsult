@@ -5,19 +5,23 @@ List of all dictionaries used in the application.
 
 # Status Dictionary
 STATUS = [
-    ('Active', 'Active'),
-    ('Inactive', 'Inactive'),
-    ('Pending', 'Pending')
+    ('ACTIVE', 'Active'),
+    ('INACTIVE', 'Inactive'),
+    ('PENDING', 'Pending')
 ]
 
-# Name Prefix Dictionary
-NAME_PREFIX = [
-    ('', ''),
-    ('MR', 'Mr.'),
-    ('MRS', 'Mrs.'),
-    ('MS', 'Ms.'),
-    ('DR', 'Doctor'),
-    ('REV', 'Reverend')
+# User Role Dictionary
+USER_ROLE = [
+    ('ADMIN', 'Admin'),
+    ('PROVIDER', 'Provider'),
+    ('SPECIALIST', 'Specialist'),
+    ('STAFF', 'Staff')
+]
+
+# User Type Dictionary
+USER_TYPE = [
+    ('SUPER USER', 'Super User'),
+    ('USER', 'User')
 ]
 
 # Name Suffix Dictionary
