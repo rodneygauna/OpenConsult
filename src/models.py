@@ -156,3 +156,12 @@ class Patient(db.Model):
     city = db.Column(db.Text)
     state = db.Column(db.String(2))
     zipcode = db.Column(db.String(10))
+
+    def __init__(self, firstname, lastname, date_of_birth, sex):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.date_of_birth = date_of_birth
+        self.sex = sex
+
+    def __repr__(self):
+        return f"Patient Name: {self.firstname} {self.lastname}"
