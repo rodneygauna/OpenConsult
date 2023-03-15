@@ -27,7 +27,8 @@ SQLITE_LOCATION = os.getenv(
 app = Flask(__name__)
 basedir = SQLITE_LOCATION
 app.config['SECRET_KEY'] = SECRET_KEY
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(
+    basedir, 'database.db')
 
 
 # Database initialization
