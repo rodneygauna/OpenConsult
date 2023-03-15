@@ -56,3 +56,103 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"User email: {self.email}"
+
+
+class Practice(db.Model):
+    '''Practice model'''
+
+    __tablename__ = 'practices'
+
+    # IDs
+    id = db.Column(db.Integer, primary_key=True)
+    # Timestamps
+    created_date = db.Column(
+        db.DateTime, nullable=False, default=datetime.utcnow)
+    updated_date = db.Column(db.DateTime, default=datetime.utcnow)
+    # Practice Information
+    name = db.Column(db.Text, nullable=False)
+    street_number = db.Column(db.String(10))
+    street_prefix = db.Column(db.String(2))
+    street_name = db.Column(db.Text)
+    street_type = db.Column(db.String(5))
+    street_suffix = db.Column(db.String(2))
+    suite_unit_number = db.Column(db.Text)
+    po_box_address = db.Column(db.Text)
+    city = db.Column(db.Text)
+    state = db.Column(db.String(2))
+    zipcode = db.Column(db.String(10))
+    phone_number = db.Column(db.String(10))
+    fax_number = db.Column(db.String(10))
+    email = db.Column(db.String(255))
+
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return f"Practice Name: {self.name}"
+
+
+class UserPractice(db.Model):
+    '''User Practice model'''
+
+    __tablename__ = 'user_practice'
+
+    # IDs
+    id = db.Column(db.Integer, primary_key=True)
+    # User ID
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    # Practice ID
+    practice_id = db.Column(db.Integer, db.ForeignKey('practices.id'))
+
+    def __init__(self, user_id, practice_id):
+        self.user_id = user_id
+        self.practice_id = practice_id
+
+    def __repr__(self):
+        return f"User ID: {self.user_id} Practice ID: {self.practice_id}"
+
+
+class Patient(db.Model):
+    '''Patient model'''
+
+    __tablename__ = 'patients'
+
+    # IDs
+    id = db.Column(db.Integer, primary_key=True)
+    # Timestamps
+    created_date = db.Column(
+        db.DateTime, nullable=False, default=datetime.utcnow)
+    updated_date = db.Column(db.DateTime, default=datetime.utcnow)
+    # Status
+    status = db.Column(db.String(10), default='ACTIVE')
+    # Profile Picture
+    profile_image = db.Column(
+        db.String(255), nullable=False, default='default_profile.png')
+    # Patient Demographics
+    firstname = db.Column(db.String(255), nullable=False)
+    middlename = db.Column(db.String(255))
+    lastname = db.Column(db.String(255), nullable=False)
+    suffixname = db.Column(db.String(5))
+    # Patient Date of Birth
+    date_of_birth = db.Column(db.Date, nullable=False)
+    # Patient Sex at Birth
+    sex = db.Column(db.String(1), nullable=False)
+    # Patient Gender Identity
+    gender_idenity = db.Column(db.Text)
+    # Patient Sexual Orientation
+    sexual_orientation = db.Column(db.Text)
+    # Patient Contact Information
+    mobile_number = db.Column(db.String(10))
+    home_number = db.Column(db.String(10))
+    work_number = db.Column(db.String(10))
+    # Patient Address
+    street_number = db.Column(db.String(10))
+    street_prefix = db.Column(db.String(2))
+    street_name = db.Column(db.Text)
+    street_type = db.Column(db.String(5))
+    street_suffix = db.Column(db.String(2))
+    apartment_unit_room = db.Column(db.Text)
+    po_box_address = db.Column(db.Text)
+    city = db.Column(db.Text)
+    state = db.Column(db.String(2))
+    zipcode = db.Column(db.String(10))
