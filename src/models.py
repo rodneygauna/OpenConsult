@@ -1,5 +1,6 @@
 '''
 Database models for the application.
+Testing remote SSH and Git connection.
 '''
 
 # Imports
