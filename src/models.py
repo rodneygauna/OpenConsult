@@ -68,7 +68,9 @@ class Practice(db.Model):
     # Timestamps
     created_date = db.Column(
         db.DateTime, nullable=False, default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
     updated_date = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_by = db.Column(db.Integer, db.ForeignKey('users.id'))
     # Practice Information
     name = db.Column(db.Text, nullable=False)
     street_number = db.Column(db.String(10))
@@ -122,7 +124,9 @@ class Patient(db.Model):
     # Timestamps
     created_date = db.Column(
         db.DateTime, nullable=False, default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
     updated_date = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_by = db.Column(db.Integer, db.ForeignKey('users.id'))
     # Status
     status = db.Column(db.String(10), default='ACTIVE')
     # Profile Picture
