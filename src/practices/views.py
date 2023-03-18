@@ -21,9 +21,26 @@ practice_bp = Blueprint('practice', __name__)
 def practices():
     '''Displays all practices'''
 
+    # Checks if user is an admin
+    if current_user.user_role != 'ADMIN':
+        return 'You are not authorized to view this page.', 401
+
     # Gets all practices
     practices = Practice.query.order_by(Practice.name).all()
 
     return render_template('practices/practices.html',
                            title='LFWarchief - Practices',
                            practices=practices)
+
+
+"""
+TODO:
+- View Practice
+- Edit Practice
+- Add Practice User (provider, staff)
+- View Practice User (provider, staff)
+- Edit Practice User (provider, staff)
+- Add Patient
+- View Patient
+- Edit Patient
+"""

@@ -31,7 +31,7 @@ class User(db.Model, UserMixin):
         db.DateTime, nullable=False, default=datetime.utcnow)
     updated_date = db.Column(db.DateTime, default=datetime.utcnow)
     # User Role
-    user_role = db.Column(db.String(10), default='STAFF')
+    user_role = db.Column(db.String(10), default='ADMIN')
     # User Type
     user_type = db.Column(db.String(10), default='USER')
     # Status
