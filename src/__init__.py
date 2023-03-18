@@ -49,7 +49,9 @@ login_manager.login_view = 'users.login'
 from src.cli_commands.cli_commands import commands_bp
 from src.core.views import core_bp
 from src.users.views import users_bp
+from src.practices.views import practice_bp
 
 app.register_blueprint(commands_bp)
 app.register_blueprint(core_bp)
 app.register_blueprint(users_bp)
+app.register_blueprint(practice_bp)

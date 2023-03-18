@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block content %}
+<h4>Practices</h4>
+<div>
+  <a href="#" class="button button-primary">Add New Practice</a>
+</div>
+<table class="u-full-width">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Patients</th>
+      <th>Users</th>
+      <th>Consults</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if results %} {% for practice in practices %}
+    <tr>
+      <td>{{ practice.name }}</td>
+      <td>{{ practice.address }}</td>
+      <td>{{ practice.phone }}</td>
+      <td>###</td>
+      <td>###</td>
+      <td>###</td>
+      <td>Actions go here</td>
+    </tr>
+    {% endfor %} {% else %}
+    <tr>
+      <td colspan="7">No practices found</td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock content %}
