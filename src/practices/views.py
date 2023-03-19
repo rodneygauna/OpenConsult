@@ -8,7 +8,7 @@ from datetime import datetime
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import current_user, login_required
 from src import db
-from src.models import Practice
+from src.models import Practice, Patient
 from src.practices.forms import PracticeForm
 
 
@@ -28,10 +28,14 @@ def practices():
 
     # Gets all practices
     practices = Practice.query.order_by(Practice.name).all()
+    # Gets the count of each patient per practice
+    patient_count = Patient.query.with_entities(
+        Patient.practice_id, db.func.count(Patient.id)).group_by(Patient.practice_id).all()
 
     return render_template('practices/practices.html',
                            title='OpenConsult - Practices',
-                           practices=practices)
+                           practices=practices,
+                           patient_count=patient_count)
 
 
 # Add practice
@@ -138,6 +142,27 @@ def edit_practice(practice_id):
                            title='OpenConsult - Edit Practice',
                            form=form,
                            practice=practice)
+
+
+# View practice
+@practice_bp.route('/practice/<int:practice_id>')
+@login_required
+def view_practice(practice_id):
+    '''Displays a practice'''
+
+    # Checks if user is an admin
+    if current_user.user_role != 'ADMIN':
+        return 'You are not authorized to view this page.', 401
+
+    # Queries the practice id
+    practice = Practice.query.get_or_404(practice_id)
+    # Queries the practice's patients
+    patient_count = Patient.query.filter_by(practice_id=practice_id).count()
+
+    return render_template('practices/view_practice.html',
+                           title='OpenConsult - View Practice',
+                           practice=practice,
+                           patient_count=patient_count)
 
 
 """

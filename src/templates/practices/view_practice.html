@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %}
+<h4>{{ practice.name }}</h4>
+<div class="row">
+  <a
+    href="{{ url_for('practice.edit_practice', practice_id=practice.id) }}"
+    class="button button-secondary"
+    >Edit Practice</a
+  >
+</div>
+<div class="row">
+  <div class="four columns">
+    <h5>Address</h5>
+    <p>Address goes here</p>
+    <h5>Phone</h5>
+    <p>{{ practice.phone_number }}</p>
+    <h5>Users</h5>
+    <p>###</p>
+  </div>
+  <div class="four columns">
+    <h5>Patients</h5>
+    <p>{{ patient_count }}</p>
+    <a href="#" class="button button-primary">Add Patient</a>
+  </div>
+  <div class="four columns">
+    <h5>Consults</h5>
+    <p>###</p>
+    <a href="#" class="button button-primary">Add Consult</a>
+  </div>
+</div>
+{% endblock content %}

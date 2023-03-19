@@ -23,10 +23,16 @@
       <td>{{ practice.name }}</td>
       <td></td>
       <td></td>
-      <td>###</td>
+      <td>{{ patient_count }}</td>
       <td>###</td>
       <td>###</td>
       <td>
+        <a
+          href="{{ url_for('practice.view_practice', practice_id=practice.id) }}"
+          class="button button-secondary"
+          >View Practice</a
+        >
+        <br />
         <a
           href="{{ url_for('practice.edit_practice', practice_id=practice.id) }}"
           class="button button-secondary"
