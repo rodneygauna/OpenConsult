@@ -72,6 +72,68 @@ def add_practice():
                            title='OpenConsult - Add Practice',
                            form=form)
 
+# Edit practice
+
+
+@practice_bp.route('/practice/<int:practice_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_practice(practice_id):
+    '''Edits a practice'''
+
+    form = PracticeForm()
+
+    # Checks if user is an admin
+    if current_user.user_role != 'ADMIN':
+        return 'You are not authorized to view this page.', 401
+
+    # Queries the practice id
+    practice = Practice.query.get_or_404(practice_id)
+
+    # Gets practice info
+    if request.method == 'GET':
+        form.name.data = practice.name
+        form.street_number.data = practice.street_number
+        form.street_prefix.data = practice.street_prefix
+        form.street_name.data = practice.street_name
+        form.street_type.data = practice.street_type
+        form.street_suffix.data = practice.street_suffix
+        form.suite_unit_number.data = practice.suite_unit_number
+        form.po_box_address.data = practice.po_box_address
+        form.city.data = practice.city
+        form.state.data = practice.state
+        form.zipcode.data = practice.zipcode
+        form.phone_number.data = practice.phone_number
+        form.fax_number.data = practice.fax_number
+        form.email.data = practice.email
+
+    # Edits practice info
+    if form.validate_on_submit():
+        # Check if user clicked cancel
+        if form.cancel.data:
+            return redirect(url_for('practice.practices'))
+        practice.name = form.name.data
+        practice.street_number = form.street_number.data
+        practice.street_prefix = form.street_prefix.data
+        practice.street_name = form.street_name.data
+        practice.street_type = form.street_type.data
+        practice.street_suffix = form.street_suffix.data
+        practice.suite_unit_number = form.suite_unit_number.data
+        practice.po_box_address = form.po_box_address.data
+        practice.city = form.city.data
+        practice.state = form.state.data
+        practice.zipcode = form.zipcode.data
+        practice.phone_number = form.phone_number.data
+        practice.fax_number = form.fax_number.data
+        practice.email = form.email.data
+        db.session.commit()
+        flash('Practice updated successfully.')
+        return redirect(url_for('practice.practices'))
+
+    return render_template('practices/add_practice.html',
+                           title='OpenConsult - Edit Practice',
+                           form=form,
+                           practice=practice)
+
 
 """
 TODO:

@@ -26,7 +26,13 @@
       <td>###</td>
       <td>###</td>
       <td>###</td>
-      <td>Actions go here</td>
+      <td>
+        <a
+          href="{{ url_for('practice.edit_practice', practice_id=practice.id) }}"
+          class="button button-secondary"
+          >Edit Practice</a
+        >
+      </td>
     </tr>
     {% endfor %} {% else %}
     <tr>

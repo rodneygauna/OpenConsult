@@ -14,6 +14,9 @@
   form.phone_number }} {{ form.fax_number.label }}{{ form.fax_number }} {{
   form.email.label }}{{ form.email }}
   <br />
+  <a href="{{ url_for('practice.practices') }}" class="button button-secondary"
+    >Cancel</a
+  >
   {{ form.submit(class="button-primary") }}
 </form>
 {% endblock content %}

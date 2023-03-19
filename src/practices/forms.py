@@ -32,3 +32,4 @@ class PracticeForm(FlaskForm):
     fax_number = StringField('Fax Number')
     email = StringField('Email')
     submit = SubmitField('Save')
+    cancel = SubmitField('Cancel', render_kw={'formnovalidate': True})
