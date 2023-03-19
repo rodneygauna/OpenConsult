@@ -19,7 +19,11 @@
   <div class="four columns">
     <h5>Patients</h5>
     <p>{{ patient_count }}</p>
-    <a href="#" class="button button-primary">Add Patient</a>
+    <a
+      href="{{ url_for('patient.add_patient', practice_id=practice.id) }}"
+      class="button button-primary"
+      >Add Patient</a
+    >
   </div>
   <div class="four columns">
     <h5>Consults</h5>
