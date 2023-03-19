@@ -65,7 +65,7 @@ def add_practice():
 
         db.session.add(practice)
         db.session.commit()
-        flash('Practice added successfully.')
+        flash('Practice added successfully.', 'success')
         return redirect(url_for('practice.practices'))
 
     return render_template('practices/add_practice.html',
@@ -126,7 +126,7 @@ def edit_practice(practice_id):
         practice.fax_number = form.fax_number.data
         practice.email = form.email.data
         db.session.commit()
-        flash('Practice updated successfully.')
+        flash('Practice updated successfully.', 'success')
         return redirect(url_for('practice.practices'))
 
     return render_template('practices/add_practice.html',
