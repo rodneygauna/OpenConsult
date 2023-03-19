@@ -26,7 +26,8 @@ def add_patient(practice_id):
 
     if form.validate_on_submit():
         if form.cancel.data:
-            return redirect(url_for('practice.view_practice', practice_id=practice_id))
+            return redirect(url_for('practice.view_practice',
+                                    practice_id=practice_id))
         # Commits new practice's patient data to the database
         patient = Patient(practice_id=practice_id,
                           firstname=form.firstname.data,
@@ -58,7 +59,8 @@ def add_patient(practice_id):
         db.session.add(patient)
         db.session.commit()
         flash('Patient added successfully.', 'success')
-        return redirect(url_for('practice.view_practice', practice_id=practice_id))
+        return redirect(url_for('practice.view_practice',
+                                practice_id=practice_id))
 
     return render_template('patients/add_patient.html',
                            title='OpenConsult - Add Patient',

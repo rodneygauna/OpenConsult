@@ -171,7 +171,6 @@ TODO:
 - Add Practice User (provider, staff)
 - View Practice User (provider, staff)
 - Edit Practice User (provider, staff)
-- Add Patient
 - View Patient
 - Edit Patient
 """
