@@ -137,8 +137,6 @@ def edit_practice(practice_id):
 
 """
 TODO:
-- View Practice
-- Edit Practice
 - Add Practice User (provider, staff)
 - View Practice User (provider, staff)
 - Edit Practice User (provider, staff)
