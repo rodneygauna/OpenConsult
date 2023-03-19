@@ -47,6 +47,8 @@ def add_practice():
         return 'You are not authorized to view this page.', 401
 
     if form.validate_on_submit():
+        if form.cancel.data:
+            return redirect(url_for('practice.practices'))
         # Commits new practice's data to the database
         practice = Practice(name=form.name.data,
                             street_number=form.street_number.data,
@@ -74,9 +76,8 @@ def add_practice():
                            title='OpenConsult - Add Practice',
                            form=form)
 
+
 # Edit practice
-
-
 @practice_bp.route('/practice/<int:practice_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_practice(practice_id):
