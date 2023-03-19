@@ -1,5 +1,15 @@
 {% extends "base.html" %} {% block content %}
 <h4>Patient Profile</h4>
+<a
+  href="{{ url_for('patient.patients', practice_id=patient.practice_id) }}"
+  class="button button-secondary"
+  >Back to Patients</a
+>
+<a
+  href="{{ url_for('patient.edit_patient', patient_id=patient.id) }}"
+  class="button button-secondary"
+  >Edit Patient</a
+>
 <div class="row">
   <div class="six columns">
     <!-- Start Patient Name -->

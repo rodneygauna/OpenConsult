@@ -49,7 +49,9 @@
   <h5>Patient Status</h5>
   {{ form.status.label }}{{ form.status }}
   <br />
-  <a href="{{ url_for('practice.practices') }}" class="button button-secondary"
+  <a
+    href="{{ url_for('patient.view_patient', patient_id=patient.practice_id) }}"
+    class="button button-secondary"
     >Cancel</a
   >
   {{ form.submit(class="button-primary") }}
