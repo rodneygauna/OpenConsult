@@ -20,6 +20,12 @@
     <h5>Patients</h5>
     <p>{{ patient_count }}</p>
     <a
+      href="{{ url_for('patient.patients', practice_id=practice.id) }}"
+      class="button button-secondary"
+      >View Patients</a
+    >
+    <br />
+    <a
       href="{{ url_for('patient.add_patient', practice_id=practice.id) }}"
       class="button button-primary"
       >Add Patient</a

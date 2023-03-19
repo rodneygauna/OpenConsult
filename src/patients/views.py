@@ -16,6 +16,22 @@ from src.patients.forms import PatientForm
 patient_bp = Blueprint('patient', __name__)
 
 
+# View patients
+@patient_bp.route('/patients/<int:practice_id>')
+@login_required
+def patients(practice_id):
+    '''Displays all patients for a practice'''
+
+    # Gets all patients for a practice
+    patients = Patient.query.filter_by(practice_id=practice_id)\
+        .order_by(Patient.lastname).all()
+
+    return render_template('patients/patients.html',
+                           title='OpenConsult - Patients',
+                           patients=patients,
+                           practice_id=practice_id)
+
+
 # Add patient
 @patient_bp.route('/patient/<int:practice_id>/add', methods=['GET', 'POST'])
 @login_required
