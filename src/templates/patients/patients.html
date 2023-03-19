@@ -19,7 +19,11 @@
     <tr>
       <td>{{ patient.lastname }}, {{ patient.firstname }}</td>
       <td>
-        <a href="#" class="button button-secondary">View Patient</a>
+        <a
+          href="{{ url_for('patient.view_patient', patient_id=patient.id) }}"
+          class="button button-secondary"
+          >View Patient</a
+        >
       </td>
     </tr>
     {% endfor %} {% else %}

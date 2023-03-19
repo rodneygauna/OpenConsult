@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block content %}
+<h4>Patient Profile</h4>
+<div class="row">
+  <div class="six columns">
+    <!-- Start Patient Name -->
+    <h5>Patient Name</h5>
+    <h6>First Name</h6>
+    <p>{{ patient.firstname }}</p>
+    <!-- End Patient Name -->
+  </div>
+  <div class="six columns">
+    <!-- Start Address -->
+    <h5>Patient Address</h5>
+    <!-- End Address -->
+  </div>
+</div>
+<div class="row">
+  <div class="six columns">
+    <!-- Start Demographics -->
+    <h5>Patient Demographics</h5>
+    <!-- End Demographics -->
+  </div>
+  <div class="six columns">
+    <!-- Start Phone -->
+    <h5>Patient Contact Info</h5>
+    <!-- End Phone -->
+  </div>
+</div>
+<!-- Status -->
+<h5>Patient Status</h5>
+{{ patient.status }} {% endblock content %}

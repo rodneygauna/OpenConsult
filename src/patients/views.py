@@ -32,9 +32,23 @@ def patients(practice_id):
                            practice_id=practice_id)
 
 
-# Add patient
-@patient_bp.route('/patient/<int:practice_id>/add', methods=['GET', 'POST'])
+# View patient
+@patient_bp.route('/patient/<int:patient_id>')
 @login_required
+def view_patient(patient_id):
+    '''Displays a patient's information'''
+
+    # Gets patient's information
+    patient = Patient.query.get_or_404(patient_id)
+
+    return render_template('patients/view_patient.html',
+                           title='OpenConsult - Patient',
+                           patient=patient)
+
+
+# Add patient
+@ patient_bp.route('/patient/<int:practice_id>/add', methods=['GET', 'POST'])
+@ login_required
 def add_patient(practice_id):
     '''Adds a new patient'''
 
