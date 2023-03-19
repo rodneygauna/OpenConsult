@@ -61,7 +61,9 @@ def add_practice():
                             zipcode=form.zipcode.data,
                             phone_number=form.phone_number.data,
                             fax_number=form.fax_number.data,
-                            email=form.email.data)
+                            email=form.email.data,
+                            created_by=current_user.id,
+                            updated_by=current_user.id)
 
         db.session.add(practice)
         db.session.commit()
@@ -125,6 +127,8 @@ def edit_practice(practice_id):
         practice.phone_number = form.phone_number.data
         practice.fax_number = form.fax_number.data
         practice.email = form.email.data
+        practice.updated_at = datetime.utcnow()
+        practice.updated_by = current_user.id
         db.session.commit()
         flash('Practice updated successfully.', 'success')
         return redirect(url_for('practice.practices'))

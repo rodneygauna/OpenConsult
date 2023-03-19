@@ -6,7 +6,7 @@ Practice forms for the application.
 # Imports
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Length
 from src.dictionaries.dict_street import (
     STREET_PREFIX_SUFFIX,
     STREET_TYPE_CHOICES)
@@ -18,7 +18,8 @@ class PracticeForm(FlaskForm):
     '''Form to add or edit a practice'''
 
     name = StringField('Name*', validators=[DataRequired()])
-    street_number = StringField('Street Number*', validators=[DataRequired()])
+    street_number = StringField(
+        'Street Number*', validators=[DataRequired(), Length(min=1, max=10)])
     street_prefix = SelectField('Street Prefix', choices=STREET_PREFIX_SUFFIX)
     street_name = StringField('Street Name*', validators=[DataRequired()])
     street_type = SelectField('Street Type', choices=STREET_TYPE_CHOICES)
