@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block content %}
+<h4>Add Practice</h4>
+<form method="POST">
+  {{ form.hidden_tag() }} {{ form.name.label }}{{ form.name }} {{
+  form.street_number.label }}{{ form.street_number }} {{
+  form.street_prefix.label }}{{ form.street_prefix(class="select2-search") }} {{
+  form.street_name.label }}{{ form.street_name }} {{ form.street_type.label }}{{
+  form.street_type(class="select2-search") }} {{ form.street_suffix.label }}{{
+  form.street_suffix(class="select2-search") }} {{ form.suite_unit_number.label
+  }}{{ form.suite_unit_number }} {{ form.po_box_address.label }}{{
+  form.po_box_address }} {{ form.city.label }}{{ form.city }} {{
+  form.state.label }}{{ form.state(class="select2-search") }} {{
+  form.zipcode.label }}{{ form.zipcode }} {{ form.phone_number.label }}{{
+  form.phone_number }} {{ form.fax_number.label }}{{ form.fax_number }} {{
+  form.email.label }}{{ form.email }}
+  <br />
+  {{ form.submit(class="button-primary") }}
+</form>
+{% endblock content %}
