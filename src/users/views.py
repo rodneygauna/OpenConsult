@@ -31,7 +31,7 @@ def register_user():
     if form.validate_on_submit():
         # Checks if email is already registered
         if User.query.filter_by(email=form.email.data).first():
-            flash('Email already registered.')
+            flash('Email already registered.', 'error')
             return redirect(url_for('users.register_user'))
 
         # Commits new user's data to the database
@@ -42,7 +42,7 @@ def register_user():
 
         db.session.add(user)
         db.session.commit()
-        flash('Registration successful.')
+        flash('Registration successful.', 'success')
         return redirect(url_for('users.login'))
 
     return render_template('users/register.html',
@@ -68,8 +68,9 @@ def login():
             if next is None or not next[0] == '/':
                 next = url_for('core.index')
 
-            flash('Login successful.')
+            flash('Login successful.', 'success')
             return redirect(next)
+        flash('Invalid email or password.', 'error')
 
     return render_template('users/login.html',
                            title='OpenConsult - Login',
@@ -105,7 +106,7 @@ def account():
         current_user.email = form.email.data
         current_user.updated_date = datetime.utcnow()
         db.session.commit()
-        flash('User Account Updated')
+        flash('User Account Updated', 'success')
         return redirect(url_for('users.account'))
 
     elif request.method == 'GET':
@@ -139,7 +140,7 @@ def add_user(practice_id):
 
             db.session.add(practice_user)
             db.session.commit()
-            flash('User associated to practice.')
+            flash('User associated to practice.', 'success')
             return redirect(url_for('practice.view_practice',
                                     practice_id=practice_id))
 
@@ -157,7 +158,7 @@ def add_user(practice_id):
                                      practice_id=practice_id)
         db.session.add(practice_user)
         db.session.commit()
-        flash('User added to practice.')
+        flash('User added to practice.', 'success')
         return redirect(url_for('practice.view_practice',
                                 practice_id=practice_id))
 
