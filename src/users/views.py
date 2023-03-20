@@ -166,3 +166,23 @@ def add_user(practice_id):
                            form=form,
                            practice_id=practice_id,
                            practice=practice)
+
+
+# View users for a practice
+@users_bp.route('/practice/view_users/<int:practice_id>')
+@login_required
+def view_users(practice_id):
+    '''Views users for a practice'''
+
+    # Queries database for practice
+    practice = Practice.query.get_or_404(practice_id)
+
+    # Queries database for users associated to a practice
+    practice_users = User.query.join(UserPractice).filter(
+        UserPractice.practice_id == practice_id).all()
+
+    return render_template('users/view_practice_users.html',
+                           title='OpenConsult - View Users',
+                           practice_id=practice_id,
+                           practice=practice,
+                           practice_users=practice_users)

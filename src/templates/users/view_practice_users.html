@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block content %}
+<h4>Practice Users</h4>
+<table class="u-full-width">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>User Role</th>
+      <th>User Type</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if practice_users %} {% for pu in practice_users %}
+    <tr>
+      <td>Name goes here</td>
+      <td>{{ pu.email }}</td>
+      <td>{{ pu.user_role }}</td>
+      <td>{{ pu.user_type }}</td>
+      <td>Actions go here</td>
+    </tr>
+    {% endfor %} {% else %}
+    <tr>
+      <td colspan="5">Practice has no users</td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock content %}
