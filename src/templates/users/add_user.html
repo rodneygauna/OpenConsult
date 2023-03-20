@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block content %}
+<h1>Add Practice User</h1>
+<h5>{{ practice.name }}</h5>
+<!-- Start Add User -->
+<form method="POST">
+  {{ form.hidden_tag() }} {{ form.user_role.label }}{{
+  form.user_role(class="select2-search") }} {{ form.user_type.label }}{{
+  form.user_type(class="select2-search") }} {{form.email.label }}{{form.email }}
+  {{ form.password.label }}{{ form.password }} {{ form.pass_confirm.label }}{{
+  form.pass_confirm }}
+  <br />
+  {{ form.submit(class="button-primary") }}
+</form>
+<!-- End Add User -->
+{% endblock content %}

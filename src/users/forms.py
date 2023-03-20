@@ -6,10 +6,11 @@ User forms for the application.
 # Imports
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms import ValidationError
 from src.models import User
+from src.dictionaries.dict_general import USER_ROLE, USER_TYPE
 
 
 # Register user form
@@ -52,3 +53,19 @@ class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Log In')
+
+
+# Form - Add Practice User
+class AddPracticeUserForm(FlaskForm):
+    '''Form to add a user to a practice'''
+
+    user_role = SelectField('User Role', choices=USER_ROLE,
+                            validators=[DataRequired()])
+    user_type = SelectField('User Type', choices=USER_TYPE,
+                            validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired(), EqualTo(
+        'pass_confirm', message='Passwords must match.')])
+    pass_confirm = PasswordField(
+        'Confirm Password', validators=[DataRequired()])
+    submit = SubmitField('Add User')

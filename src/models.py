@@ -46,9 +46,11 @@ class User(db.Model, UserMixin):
     suffixname = db.Column(db.String(5))
     credentials = db.Column(db.String(255))
 
-    def __init__(self, email, password):
+    def __init__(self, email, password, user_role, user_type):
         self.email = email
         self.password_hash = generate_password_hash(password)
+        self.user_role = user_role
+        self.user_type = user_type
 
     def check_password(self, password):
         '''Checks if the password is correct'''
