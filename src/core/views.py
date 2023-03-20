@@ -4,7 +4,7 @@ Main views for the core app
 
 
 # Imports
-from flask import render_template, Blueprint, flash
+from flask import render_template, Blueprint
 
 
 # Blueprint
