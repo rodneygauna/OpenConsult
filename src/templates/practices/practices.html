@@ -11,9 +11,6 @@
       <th>Name</th>
       <th>Address</th>
       <th>Phone</th>
-      <th>Patients</th>
-      <th>Users</th>
-      <th>Consults</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -22,9 +19,6 @@
     <tr>
       <td>{{ practice.name }}</td>
       <td></td>
-      <td></td>
-      <td>{{ patient_count }}</td>
-      <td>###</td>
       <td>###</td>
       <td>
         <a
@@ -42,7 +36,7 @@
     </tr>
     {% endfor %} {% else %}
     <tr>
-      <td colspan="7">No practices found</td>
+      <td colspan="4">No practices found</td>
     </tr>
     {% endif %}
   </tbody>

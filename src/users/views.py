@@ -21,6 +21,13 @@ from src.users.picture_handler import add_profile_pic
 users_bp = Blueprint('users', __name__)
 
 
+"""
+TODO:
+- Associated existing user to Practice User
+- Edit Practice User
+"""
+
+
 # Register user
 @users_bp.route('/register', methods=['GET', 'POST'])
 def register_user():

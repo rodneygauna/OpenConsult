@@ -28,15 +28,10 @@ def practices():
 
     # Gets all practices
     practices = Practice.query.order_by(Practice.name).all()
-    # Gets the count of each patient per practice
-    patient_count = Patient.query.with_entities(
-        Patient.practice_id, db.func.count(Patient.id))\
-        .group_by(Patient.practice_id).all()
 
     return render_template('practices/practices.html',
                            title='OpenConsult - Practices',
-                           practices=practices,
-                           patient_count=patient_count)
+                           practices=practices)
 
 
 # Add practice
@@ -166,10 +161,3 @@ def view_practice(practice_id):
                            practice=practice,
                            patient_count=patient_count,
                            user_count=user_count)
-
-
-"""
-TODO:
-- Add Practice User (provider, staff)
-- Edit Practice User (provider, staff)
-"""
