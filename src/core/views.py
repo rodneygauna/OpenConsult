@@ -16,8 +16,5 @@ core_bp = Blueprint('core', __name__)
 def index():
     '''Home page'''
 
-    # Testing flash messages
-    flash('Page loaded successfully.', 'success')
-
     return render_template('core/index.html',
                            title='OpenConsult - Home')
