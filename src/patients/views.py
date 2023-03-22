@@ -8,7 +8,7 @@ from datetime import datetime
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import current_user, login_required
 from src import db
-from src.models import Patient
+from src.models import Patient, Practice
 from src.patients.forms import PatientForm
 
 
@@ -54,6 +54,9 @@ def add_patient(practice_id):
 
     form = PatientForm()
 
+    # Practice variable for the cancel button
+    practice = Practice.query.get_or_404(practice_id)
+
     if form.validate_on_submit():
         if form.cancel.data:
             return redirect(url_for('practice.view_practice',
@@ -94,7 +97,8 @@ def add_patient(practice_id):
 
     return render_template('patients/add_patient.html',
                            title='OpenConsult - Add Patient',
-                           form=form)
+                           form=form,
+                           practice=practice)
 
 
 # Edit patient

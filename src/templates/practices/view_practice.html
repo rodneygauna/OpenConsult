@@ -40,7 +40,11 @@
       >View eConsults</a
     >
     <br />
-    <a href="#" class="button button-primary">Add eConsult</a>
+    <a
+      href="{{ url_for('econsult.add_econsult', practice_id=practice.id)}}"
+      class="button button-primary"
+      >Add eConsult</a
+    >
   </div>
   <div class="three columns">
     <h5>Assigned eConsults</h5>

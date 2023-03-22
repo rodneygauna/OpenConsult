@@ -68,4 +68,6 @@ class AddPracticeUserForm(FlaskForm):
         'pass_confirm', message='Passwords must match.')])
     pass_confirm = PasswordField(
         'Confirm Password', validators=[DataRequired()])
+    firstname = StringField('First Name', validators=[DataRequired()])
+    lastname = StringField('Last Name', validators=[DataRequired()])
     submit = SubmitField('Add User')

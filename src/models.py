@@ -89,6 +89,9 @@ class Practice(db.Model):
     fax_number = db.Column(db.String(10))
     email = db.Column(db.String(255))
 
+    # Relationships
+    patients = db.relationship('Patient')
+
     def __repr__(self):
         return f"Practice Name: {self.name}"
 
