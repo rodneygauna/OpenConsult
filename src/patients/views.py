@@ -8,7 +8,7 @@ from datetime import datetime
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import current_user, login_required
 from src import db
-from src.models import Patient, Practice
+from src.models import Patient
 from src.patients.forms import PatientForm
 
 
