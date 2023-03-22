@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block content %}
+<h4>eConsults</h4>
+<div>
+  <a
+    href="{{ url_for('practice.view_practice', practice_id=practice_id) }}"
+    class="button button-secondary"
+    >Back to Practice</a
+  >
+</div>
+<table class="u-full-width">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Patient</th>
+      <th>Creating Provider</th>
+      <th>Specialty</th>
+      <th>Assigned Specialist</th>
+      <th>Created Date</th>
+      <th>Last Updated Date</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if econsults %} {% for econsult in econsults %}
+    <tr>
+      <td>{{ econsults.id }}</td>
+      <td>
+        <a href="#" class="button button-secondary">View eConsult</a>
+      </td>
+    </tr>
+    {% endfor %} {% else %}
+    <tr>
+      <td colspan="9">No eConsults found</td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock content %}

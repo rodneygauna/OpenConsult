@@ -33,7 +33,13 @@
   </div>
   <div class="four columns">
     <h5>Consults</h5>
-    <p>###</p>
+    <p>{{ econsult_count }}</p>
+    <a
+      href="{{ url_for('econsult.econsults', practice_id=practice.id) }}"
+      class="button button-secondary"
+      >View Consults</a
+    >
+    <br />
     <a href="#" class="button button-primary">Add Consult</a>
   </div>
 </div>

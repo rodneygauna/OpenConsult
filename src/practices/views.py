@@ -8,7 +8,7 @@ from datetime import datetime
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import current_user, login_required
 from src import db
-from src.models import Practice, Patient, UserPractice
+from src.models import Practice, Patient, UserPractice, Consult
 from src.practices.forms import PracticeForm
 
 
@@ -154,10 +154,14 @@ def view_practice(practice_id):
     practice = Practice.query.get_or_404(practice_id)
     # Queries the practice's patients
     patient_count = Patient.query.filter_by(practice_id=practice_id).count()
+    # Queries the practice's users
     user_count = UserPractice.query.filter_by(practice_id=practice_id).count()
+    # Queries the practice's eConsults
+    econsult_count = Consult.query.filter_by(practice_id=practice_id).count()
 
     return render_template('practices/view_practice.html',
                            title='OpenConsult - View Practice',
                            practice=practice,
                            patient_count=patient_count,
-                           user_count=user_count)
+                           user_count=user_count,
+                           econsult_count=econsult_count)

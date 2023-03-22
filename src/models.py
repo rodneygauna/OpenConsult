@@ -173,6 +173,7 @@ class Consult(db.Model):
     # IDs
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('patients.id'))
+    practice_id = db.Column(db.Integer, db.ForeignKey('practices.id'))
     creating_provider_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     assigned_specialist_id = db.Column(
         db.Integer, db.ForeignKey('users.id'))
