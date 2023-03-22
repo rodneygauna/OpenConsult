@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <h4>{{ practice.name }}</h4>
 <div class="row">
-  <div class="four columns">
+  <div class="three columns">
     <h5>Users</h5>
     <p>{{ user_count }}</p>
     <a
@@ -16,7 +16,7 @@
       >Add User</a
     >
   </div>
-  <div class="four columns">
+  <div class="three columns">
     <h5>Patients</h5>
     <p>{{ patient_count }}</p>
     <a
@@ -31,18 +31,26 @@
       >Add Patient</a
     >
   </div>
-  <div class="four columns">
-    <h5>Consults</h5>
+  <div class="three columns">
+    <h5>Created eConsults</h5>
     <p>{{ econsult_count }}</p>
     <a
       href="{{ url_for('econsult.econsults', practice_id=practice.id) }}"
       class="button button-secondary"
-      >View Consults</a
+      >View eConsults</a
     >
     <br />
-    <a href="#" class="button button-primary">Add Consult</a>
+    <a href="#" class="button button-primary">Add eConsult</a>
+  </div>
+  <div class="three columns">
+    <h5>Assigned eConsults</h5>
+    <p>###</p>
+    <a href="#" class="button button-secondary">View eConsults</a>
   </div>
 </div>
+<br />
+<br />
+<h5>Practice Information</h5>
 <div class="row">
   <div class="u-full-width">
     <h5>Address</h5>
