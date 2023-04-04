@@ -1,10 +1,17 @@
 {% extends "base.html" %} {% block content %}
 <!-- User profile section -->
-<img
-  style="height: 200px; width: 200px"
-  src="{{ url_for('static',filename='profile_pics/' + current_user.profile_image) }}"
-  alt=""
-/>
+<div class="row">
+  <!--  -->
+  <div class="one-half column">
+    <img
+      style="height: 200px; width: 200px"
+      src="{{ url_for('static',filename='profile_pics/' + current_user.profile_image) }}"
+      alt=""
+    />
+  </div>
+  <!--  -->
+</div>
+<!--  -->
 <br />
 <a href="{{ url_for('users.logout') }}" class="button">Log Out</a>
 
