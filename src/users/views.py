@@ -38,22 +38,22 @@ def register_user():
     if form.validate_on_submit():
         # Checks if email is already registered
         if User.query.filter_by(email=form.email.data).first():
-            flash('Email already registered.', 'error')
+            flash('Email already registered.')
             return redirect(url_for('users.register_user'))
 
         # Commits new user's data to the database
         user = User(email=form.email.data,
                     password=form.password.data,
                     user_role='ADMIN',
-                    user_type='USER')
+                    user_type='SUPER USER')
 
         db.session.add(user)
         db.session.commit()
-        flash('Registration successful.', 'success')
+        flash('Registration successful.')
         return redirect(url_for('users.login'))
 
     return render_template('users/register.html',
-                           title='OpenConsult - Create Account',
+                           title='LFWarchief - Create Account',
                            form=form)
 
 

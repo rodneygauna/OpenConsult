@@ -2,16 +2,16 @@
 <h1>Login</h1>
 <!-- Start Login -->
 <form method="POST">
-  {{ form.hidden_tag() }} {{ form.email.label }}{{ form.email }}
-  {{ form.password.label }}{{ form.password }}
+  {{form.hidden_tag()}} {{form.email.label}}{{form.email}}
+  {{form.password.label}}{{form.password}}
   <br />
-  {{ form.submit(class="button-primary") }}
+  {{form.submit(class="button-primary")}}
 </form>
 <!-- End Login -->
 <!-- Start Registration -->
 <p>
   Not a user yet?
-  <a href="{{ url_for('users.register_user') }}">Create an account here.</a>
+  <a href="{{url_for('users.register_user')}}">Create an account here.</a>
 </p>
 <!-- End Registration -->
 {% endblock content %}
