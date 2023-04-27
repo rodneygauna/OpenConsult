@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <h1>Register</h1>
 <!-- Start Register -->
-<form method="POST" action="/register">
+<form method="POST" action="{{url_for('users.register_user')}}">
   {{form.hidden_tag()}} {{form.email.label}}{{form.email}}
   {{form.password.label}}{{form.password}}
   {{form.pass_confirm.label}}{{form.pass_confirm}}
