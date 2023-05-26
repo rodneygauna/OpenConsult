@@ -14,7 +14,7 @@ CONSULT_STATUS = [
     # Specialist has completed review and ready for provider to review
     ('TREATMENT OPTIONS AVAILABLE', 'Treatment Options Available'),
     ('ADDITIONAL INFORMATION NEEDED', 'Additional Information Needed'),
-    ('DIFFERENT SPECIALIST RECOMMENDED', 'Different Specialist Recommended'),
+    ('DIFFERENT SPECIALTY RECOMMENDED', 'Different Specialty Recommended'),
     ('IN PERSON VISIT RECOMMENDED', 'In Person Visit Recommended'),
     # Provider has reviewed and accepted the recommendation
     ('CLOSED', 'Closed')
