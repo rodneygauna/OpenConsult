@@ -5,7 +5,7 @@ Views for the econsult portion of the app.
 
 # Imports
 from datetime import datetime
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, Blueprint
 from flask_login import current_user, login_required
 from src import db
 from src.models import Consult, Patient, User, UserPractice
@@ -30,6 +30,20 @@ def econsults(practice_id):
                            title='OpenConsult - eConsults',
                            econsults=econsults,
                            practice_id=practice_id)
+
+
+# View all econsults for all practices (admin only)
+@econsult_bp.route('/econsults/all')
+@login_required
+def all_econsults():
+    """Displays all econsults for all practices"""
+
+    # Gets all econsults for all practices
+    econsults = Consult.query.order_by(Consult.created_date).all()
+
+    return render_template('econsults/all_econsults.html',
+                           title='OpenConsult - All eConsults',
+                           econsults=econsults)
 
 
 # Add econsult
@@ -73,7 +87,9 @@ def add_econsult(practice_id):
                            status="DRAFT",
                            specialty=form.specialty.data,
                            chief_complaint=form.chief_complaint.data,
-                           comments_to_specialist=form.comments_to_specialist.data,
+                           comments_to_specialist=(
+                               form.comments_to_specialist.data
+                           ),
                            main_question=form.main_question.data
                            )
         db.session.add(econsult)
