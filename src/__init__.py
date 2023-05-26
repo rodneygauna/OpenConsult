@@ -52,6 +52,7 @@ from src.users.views import users_bp
 from src.practices.views import practice_bp
 from src.patients.views import patient_bp
 from src.econsult.views import econsult_bp
+from src.settings.views import settings_bp
 
 app.register_blueprint(commands_bp)
 app.register_blueprint(core_bp)
@@ -59,3 +60,4 @@ app.register_blueprint(users_bp)
 app.register_blueprint(practice_bp)
 app.register_blueprint(patient_bp)
 app.register_blueprint(econsult_bp)
+app.register_blueprint(settings_bp)
