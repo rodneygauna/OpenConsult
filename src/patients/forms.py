@@ -34,7 +34,7 @@ class PatientForm(FlaskForm):
                               validators=[DataRequired()])
     sex = SelectField('Sex at Birth*', choices=PATIENT_SEX,
                       validators=[DataRequired()])
-    gender_idenity = SelectField('Gender Identity', choices=GENDER_IDENTITY)
+    gender_identity = SelectField('Gender Identity', choices=GENDER_IDENTITY)
     sexual_orientation = SelectField(
         'Sexual Orientation', choices=SEXUAL_ORIENTATION)
     mobile_number = StringField('Mobile Number')

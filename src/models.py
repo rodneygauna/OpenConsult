@@ -4,7 +4,7 @@ Database models for the application.
 
 # Imports
 from datetime import datetime
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash
 from flask_login import UserMixin
 from src import db, login_manager
 
@@ -45,12 +45,6 @@ class User(db.Model, UserMixin):
     lastname = db.Column(db.String(255))
     suffixname = db.Column(db.String(5))
     credentials = db.Column(db.String(255))
-
-    def __init__(self, email, password, user_role, user_type):
-        self.email = email
-        self.password_hash = generate_password_hash(password)
-        self.user_role = user_role
-        self.user_type = user_type
 
     def check_password(self, password):
         '''Checks if the password is correct'''
@@ -145,7 +139,7 @@ class Patient(db.Model):
     # Patient Sex at Birth
     sex = db.Column(db.String(1), nullable=False)
     # Patient Gender Identity
-    gender_idenity = db.Column(db.Text)
+    gender_identity = db.Column(db.Text)
     # Patient Sexual Orientation
     sexual_orientation = db.Column(db.Text)
     # Patient Contact Information

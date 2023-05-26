@@ -70,7 +70,7 @@ def add_patient(practice_id):
                           status=form.status.data,
                           date_of_birth=form.date_of_birth.data,
                           sex=form.sex.data,
-                          gender_idenity=form.gender_idenity.data,
+                          gender_identity=form.gender_identity.data,
                           sexual_orientation=form.sexual_orientation.data,
                           mobile_number=form.mobile_number.data,
                           home_number=form.home_number.data,
@@ -121,7 +121,7 @@ def edit_patient(patient_id):
         form.status.data = patient.status
         form.date_of_birth.data = patient.date_of_birth
         form.sex.data = patient.sex
-        form.gender_idenity.data = patient.gender_idenity
+        form.gender_identity.data = patient.gender_identity
         form.sexual_orientation.data = patient.sexual_orientation
         form.mobile_number.data = patient.mobile_number
         form.home_number.data = patient.home_number
@@ -150,7 +150,7 @@ def edit_patient(patient_id):
         patient.status = form.status.data
         patient.date_of_birth = form.date_of_birth.data
         patient.sex = form.sex.data
-        patient.gender_idenity = form.gender_idenity.data
+        patient.gender_identity = form.gender_identity.data
         patient.sexual_orientation = form.sexual_orientation.data
         patient.mobile_number = form.mobile_number.data
         patient.home_number = form.home_number.data
