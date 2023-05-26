@@ -70,7 +70,7 @@ def add_econsult(practice_id):
                            last_updated_date=datetime.now(),
                            last_updated_by=current_user.id,
                            creating_provider_id=form.creating_provider.data,
-                           status=form.status.data,
+                           status="DRAFT",
                            specialty=form.specialty.data,
                            chief_complaint=form.chief_complaint.data,
                            comments_to_specialist=form.comments_to_specialist.data,
