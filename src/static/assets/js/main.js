@@ -5,7 +5,7 @@
 // It is used in the select2 dropdowns in the form advanced plugin
 $(document).ready(function() {
   // Add search box to select2 dropdown
-  $('.select2-search').select2();
+  $('.select2').select2();
 });
 
 /* banner functions */

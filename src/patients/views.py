@@ -137,12 +137,13 @@ def edit_patient(patient_id):
         form.state.data = patient.state
         form.zipcode.data = patient.zipcode
 
+    # Check if user clicked cancel
+    if form.cancel.data:
+        return redirect(url_for('patient.view_patient',
+                                patient_id=patient_id))
+
     # Edits patient's information
     if form.validate_on_submit():
-        # Check if user clicked cancel
-        if form.cancel.data:
-            return redirect(url_for('patient.view_patient',
-                                    patient_id=patient_id))
         patient.firstname = form.firstname.data
         patient.middlename = form.middlename.data
         patient.lastname = form.lastname.data

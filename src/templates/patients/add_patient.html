@@ -32,8 +32,8 @@
       <!-- Start Demographics -->
       <h5>Patient Demographics</h5>
       {{ form.date_of_birth.label }}{{ form.date_of_birth }} {{ form.sex.label
-      }}{{ form.sex }} {{ form.gender_idenity.label }}{{ form.gender_idenity }}
-      {{ form.sexual_orientation.label }}{{ form.sexual_orientation }}
+      }}{{ form.sex }} {{ form.gender_identity.label }}{{ form.gender_identity
+      }} {{ form.sexual_orientation.label }}{{ form.sexual_orientation }}
       <!-- End Demographics -->
     </div>
     <div class="six columns">
@@ -49,11 +49,7 @@
   <h5>Patient Status</h5>
   {{ form.status.label }}{{ form.status }}
   <br />
-  <a
-    href="{{ url_for('practice.view_practice', practice_id=practice.id) }}"
-    class="button button-secondary"
-    >Cancel</a
-  >
-  {{ form.submit(class="button-primary") }}
+  {{ form.cancel(class="button-secondary") }} {{
+  form.submit(class="button-primary") }}
 </form>
 {% endblock content %}

@@ -6,45 +6,36 @@
     <!-- Start Patient -->
     <div class="four columns">
       <h5>Patient</h5>
-      {{ form.patient.label }} {{ form.patient(class="u-full-width") }}
+      {{ form.patient.label }} {{ form.patient }}
     </div>
     <!-- End Patient -->
     <!-- Start Provider -->
     <div class="four columns">
       <h5>Creating Provider</h5>
-      {{ form.creating_provider.label }} {{
-      form.creating_provider(class="u-full-width") }}
+      {{ form.creating_provider.label }} {{ form.creating_provider }}
     </div>
     <!-- End Provider -->
     <!-- Start Specialty -->
     <div class="four columns">
       <h5>Specialty</h5>
-      {{ form.specialty.label }} {{ form.specialty(class="u-full-width") }}
+      {{ form.specialty.label }} {{ form.specialty }}
     </div>
     <!-- End Specialty -->
   </div>
   <!-- Start Chief Complaint -->
   <div class="row">
-    {{ form.chief_complaint.label }} {{
-    form.chief_complaint(class="u-full-width") }}
+    {{ form.chief_complaint.label }} {{ form.chief_complaint }}
   </div>
   <!-- End Chief Complaint -->
   <!-- Start Main Question -->
-  <div class="row">
-    {{ form.main_question.label }} {{ form.main_question(class="u-full-width")
-    }}
-  </div>
+  <div class="row">{{ form.main_question.label }} {{ form.main_question }}</div>
   <!-- End Main Question -->
   <!-- Start Comments to Specialist -->
   <div class="row">
-    {{ form.comments_to_specialist.label }} {{
-    form.comments_to_specialist(class="u-full-width") }}
+    {{ form.comments_to_specialist.label }} {{ form.comments_to_specialist }}
   </div>
   <!-- End Comments to Specialist -->
   <br />
-  <a href="{{ url_for('practice.practices') }}" class="button button-secondary"
-    >Cancel</a
-  >
-  {{ form.submit(class="button-primary") }}
+  {{ form.cancel }} {{ form.submit }}
 </form>
 {% endblock content %}

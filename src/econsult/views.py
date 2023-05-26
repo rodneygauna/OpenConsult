@@ -23,8 +23,35 @@ def econsults(practice_id):
     '''Displays all econsults for a practice'''
 
     # Gets all econsults for a practice
-    econsults = Consult.query.filter_by(practice_id=practice_id)\
-        .order_by(Consult.created_date).all()
+    CreatingProvider = db.aliased(User, name='CreatingProvider')
+    AssignedSpecialist = db.aliased(User, name='AssignedSpecialist')
+
+    econsults = (
+        db.session.query(
+            Consult.id,
+            Consult.patient_id,
+            Consult.practice_id,
+            Consult.creating_provider_id,
+            Consult.assigned_specialist_id,
+            Consult.created_date,
+            Consult.updated_date,
+            Consult.specialty,
+            Consult.status,
+            CreatingProvider.firstname.label('creating_provider_firstname'),
+            CreatingProvider.lastname.label('creating_provider_lastname'),
+            AssignedSpecialist.firstname.label(
+                'assigned_specialist_firstname'),
+            AssignedSpecialist.lastname.label('assigned_specialist_lastname'),
+            Patient.firstname.label('patient_firstname'),
+            Patient.lastname.label('patient_lastname'),
+        )
+        .filter(Consult.practice_id == practice_id)
+        .join(CreatingProvider, Consult.creating_provider_id == CreatingProvider.id)
+        .outerjoin(AssignedSpecialist, Consult.assigned_specialist_id == AssignedSpecialist.id)
+        .join(Patient, Consult.patient_id == Patient.id)
+        .order_by(Consult.created_date.desc())
+        .all()
+    )
 
     return render_template('econsults/econsults.html',
                            title='OpenConsult - eConsults',
@@ -60,30 +87,42 @@ def add_econsult(practice_id):
 
     # List of patients for the practice
     form.patient.choices = [(0, 'Select a patient')] + \
-        [(patient.id, patient.firstname + ' ' + patient.lastname)
+        [(patient.id, patient.lastname + ', ' + patient.firstname)
          for patient in patients]
 
     # Query for providers in the practice
-    providers = User.query.join(UserPractice).filter(
-        UserPractice.practice_id == practice_id).order_by(User.lastname).all()
+    providers = (
+        db.session.query(
+            User.id,
+            User.firstname,
+            User.lastname,
+            User.user_role,
+            UserPractice.practice_id,
+            UserPractice.user_id,
+        )
+        .filter(User.user_role == "PROVIDER")
+        .join(UserPractice, User.id == UserPractice.user_id)
+        .filter(UserPractice.practice_id == practice_id)
+        .order_by(User.lastname)
+        .all()
+    )
 
     # List of providers for the practice
     form.creating_provider.choices = [(0, 'Select a provider')] + \
-        [(provider.id, provider.id)
+        [(provider.id, provider.lastname + ', ' + provider.firstname)
          for provider in providers]
 
+    if form.cancel.data:
+        return redirect(url_for('practice.view_practice',
+                                practice_id=practice_id))
+
     if form.validate_on_submit():
-        if form.cancel.data:
-            return redirect(url_for('practice.view_practice',
-                                    practice_id=practice_id))
         # Commits new econsult's data to the database
         econsult = Consult(patient_id=form.patient.data,
                            practice_id=practice_id,
+                           creating_provider_id=form.creating_provider.data,
                            created_date=datetime.now(),
                            created_by=current_user.id,
-                           last_updated_date=datetime.now(),
-                           last_updated_by=current_user.id,
-                           creating_provider_id=form.creating_provider.data,
                            status="DRAFT",
                            specialty=form.specialty.data,
                            chief_complaint=form.chief_complaint.data,

@@ -111,7 +111,7 @@ def db_seed():
         ))
 
     # Create patients
-    for i in range(1, 101):
+    for i in range(1, 1001):
         data.append(Patient(
             firstname=faker.first_name(),
             middlename=faker.first_name(),
@@ -139,6 +139,7 @@ def db_seed():
             city=faker.city(),
             state=faker.state_abbr(),
             zipcode=faker.postcode(),
+            practice_id=random.randint(1, 10)
         ))
 
     # Add data to the database
