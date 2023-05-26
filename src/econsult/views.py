@@ -46,8 +46,14 @@ def econsults(practice_id):
             Patient.lastname.label('patient_lastname'),
         )
         .filter(Consult.practice_id == practice_id)
-        .join(CreatingProvider, Consult.creating_provider_id == CreatingProvider.id)
-        .outerjoin(AssignedSpecialist, Consult.assigned_specialist_id == AssignedSpecialist.id)
+        .join(
+            CreatingProvider,
+            Consult.creating_provider_id == CreatingProvider.id
+        )
+        .outerjoin(
+            AssignedSpecialist,
+            Consult.assigned_specialist_id == AssignedSpecialist.id
+        )
         .join(Patient, Consult.patient_id == Patient.id)
         .order_by(Consult.created_date.desc())
         .all()
@@ -112,11 +118,13 @@ def add_econsult(practice_id):
         [(provider.id, provider.lastname + ', ' + provider.firstname)
          for provider in providers]
 
+    # If the user clicks the cancel button, redirect to the practice page
     if form.cancel.data:
         return redirect(url_for('practice.view_practice',
                                 practice_id=practice_id))
 
-    if form.validate_on_submit():
+    # If the user clicks the save as draft button, save the econsult as a draft
+    if form.save_as_draft.data:
         # Commits new econsult's data to the database
         econsult = Consult(patient_id=form.patient.data,
                            practice_id=practice_id,
@@ -133,7 +141,29 @@ def add_econsult(practice_id):
                            )
         db.session.add(econsult)
         db.session.commit()
-        flash('eConsult added successfully.', 'success')
+        flash('eConsult submitted successfully.', 'success')
+        return redirect(url_for('practice.view_practice',
+                                practice_id=practice_id))
+
+    # If the user clicks the submit to specialist button, submit the econsult
+    if form.validate_on_submit():
+        # Commits new econsult's data to the database
+        econsult = Consult(patient_id=form.patient.data,
+                           practice_id=practice_id,
+                           creating_provider_id=form.creating_provider.data,
+                           created_date=datetime.now(),
+                           created_by=current_user.id,
+                           status="READY FOR REVIEW",
+                           specialty=form.specialty.data,
+                           chief_complaint=form.chief_complaint.data,
+                           comments_to_specialist=(
+                               form.comments_to_specialist.data
+                           ),
+                           main_question=form.main_question.data
+                           )
+        db.session.add(econsult)
+        db.session.commit()
+        flash('eConsult submitted successfully.', 'success')
         return redirect(url_for('practice.view_practice',
                                 practice_id=practice_id))
 

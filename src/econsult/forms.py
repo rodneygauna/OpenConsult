@@ -32,5 +32,8 @@ class ConsultForm(FlaskForm):
     main_question = TextAreaField(
         'Main Question*', validators=[DataRequired()],
         render_kw={'class': 'u-full-width'})
-    submit = SubmitField('Save', render_kw={'class': 'button-primary'})
+    submit = SubmitField('Submit to Specialists', render_kw={
+                         'class': 'button-primary'})
+    save_as_draft = SubmitField('Save as Draft', render_kw={
+                                'class': 'button-secondary'})
     cancel = SubmitField('Cancel', render_kw={'formnovalidate': True})
