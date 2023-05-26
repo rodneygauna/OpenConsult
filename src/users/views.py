@@ -53,7 +53,7 @@ def register_user():
         return redirect(url_for('users.login'))
 
     return render_template('users/register.html',
-                           title='LFWarchief - Create Account',
+                           title='OpenConsult - Create Account',
                            form=form)
 
 
