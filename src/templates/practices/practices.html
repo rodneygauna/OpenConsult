@@ -18,15 +18,22 @@
     {% if practices %} {% for practice in practices %}
     <tr>
       <td>{{ practice.name }}</td>
-      <td></td>
-      <td>###</td>
+      <td>
+        {{ practice.street_number }} {{ practice.street_prefix }} {{
+        practice.street_name }} {{ practice.street_suffix }}, {{ practice.city
+        }}, {{ practice.state }}, {{ practice.zipcode }}
+      </td>
+      <td>
+        Phone Number: {{ practice.phone_number }} {% if practice.fax_number %}
+        <br />
+        Fax Number: {{ practice.fax_number }} {% endif %}
+      </td>
       <td>
         <a
           href="{{ url_for('practice.view_practice', practice_id=practice.id) }}"
           class="button button-secondary"
           >View Practice</a
         >
-        <br />
         <a
           href="{{ url_for('practice.edit_practice', practice_id=practice.id) }}"
           class="button button-secondary"
