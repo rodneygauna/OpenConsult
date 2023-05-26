@@ -7,6 +7,7 @@ Views for the user blueprint
 from datetime import datetime
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
+from werkzeug.security import generate_password_hash
 from src import db
 from src.users.forms import (
     RegisterUserForm,
@@ -43,7 +44,9 @@ def register_user():
 
         # Commits new user's data to the database
         user = User(email=form.email.data,
-                    password=form.password.data,
+                    password_hash=generate_password_hash(
+                        form.password.data
+                    ),
                     user_role='ADMIN',
                     user_type='SUPER USER')
 
@@ -153,7 +156,9 @@ def add_user(practice_id):
 
         # Commits new user's data to the database
         user = User(email=form.email.data,
-                    password=form.password.data,
+                    password_hash=generate_password_hash(
+                        form.password.data
+                    ),
                     user_role=form.user_role.data,
                     user_type=form.user_type.data)
 
