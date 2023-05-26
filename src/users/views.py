@@ -14,7 +14,13 @@ from src.users.forms import (
     LoginForm,
     EditUserForm,
     AddPracticeUserForm)
-from src.models import User, Practice, UserPractice
+from src.models import (
+    User,
+    Practice,
+    UserPractice,
+    Specialty,
+    UserSpecialty,
+)
 from src.users.picture_handler import add_profile_pic
 
 
@@ -142,14 +148,27 @@ def add_user(practice_id):
     # Queries database for practice
     practice = Practice.query.get_or_404(practice_id)
 
+    # Choices for user specialties
+    specialities = Specialty.query.all()
+
+    form.specialty.choices = [(0, 'Select a specialty')] + \
+        [(specialty.id, specialty.name) for specialty in specialities]
+
     if form.validate_on_submit():
         # If email already exists, associate user to practice
         if User.query.filter_by(email=form.email.data).first():
             practice_user = UserPractice(user_id=form.email.data,
                                          practice_id=practice_id)
+            # Associates user to specialty
+            practice_user_specialty = UserSpecialty(
+                user_id=User.id,
+                specialty_id=form.specialty.data
+            )
 
             db.session.add(practice_user)
+            db.sessions.add(practice_user_specialty)
             db.session.commit()
+
             flash('User associated to practice.', 'success')
             return redirect(url_for('practice.view_practice',
                                     practice_id=practice_id))
@@ -168,8 +187,17 @@ def add_user(practice_id):
         # Associates user to practice
         practice_user = UserPractice(user_id=user.id,
                                      practice_id=practice_id)
+
+        # Associates user to specialty
+        practice_user_specialty = UserSpecialty(
+            user_id=user.id,
+            specialty_id=form.specialty.data
+        )
+
         db.session.add(practice_user)
+        db.session.add(practice_user_specialty)
         db.session.commit()
+
         flash('User added to practice.', 'success')
         return redirect(url_for('practice.view_practice',
                                 practice_id=practice_id))
