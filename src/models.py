@@ -190,3 +190,45 @@ class Consult(db.Model):
 
     def __repr__(self):
         return f"Consult ID: {self.id}"
+
+
+class Specialty(db.Model):
+    '''Specialty model'''
+
+    __tablename__ = 'specialties'
+
+    # IDs
+    id = db.Column(db.Integer, primary_key=True)
+    # Timestamps
+    created_date = db.Column(
+        db.DateTime, nullable=False, default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+    updated_date = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+    # Specialty Information
+    name = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text)
+
+    def __repr__(self):
+        return f"Specialty Name: {self.name}"
+
+
+class UserSpecialty(db.Model):
+    '''User and associated specialty model'''
+
+    __tablename__ = 'user_specialties'
+
+    # IDs
+    id = db.Column(db.Integer, primary_key=True)
+    # User ID
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    # Specialty ID
+    specialty_id = db.Column(db.Integer, db.ForeignKey(
+        'specialties.id'), nullable=False)
+
+    def __init__(self, user_id, specialty_id):
+        self.user_id = user_id
+        self.specialty_id = specialty_id
+
+    def __repr__(self):
+        return f"User ID: {self.user_id} Specialty ID: {self.specialty_id}"
