@@ -9,6 +9,7 @@
   <thead>
     <tr>
       <th>ID</th>
+      <th>Practice</th>
       <th>Patient</th>
       <th>Creating Provider</th>
       <th>Specialty</th>
@@ -23,6 +24,7 @@
     {% if econsults %} {% for econsult in econsults %}
     <tr>
       <td>{{ econsult.id }}</td>
+      <td>{{ econsult.name }}</td>
       <td>{{ econsult.patient_lastname }}, {{ econsult.patient_firstname }}</td>
       <td>
         {{ econsult.creating_provider_lastname }}, {{

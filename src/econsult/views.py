@@ -8,7 +8,7 @@ from datetime import datetime
 from flask import render_template, url_for, flash, redirect, Blueprint
 from flask_login import current_user, login_required
 from src import db
-from src.models import Consult, Patient, User, UserPractice
+from src.models import Consult, Patient, User, UserPractice, Practice
 from src.econsult.forms import ConsultForm
 
 
@@ -93,7 +93,9 @@ def all_econsults():
             AssignedSpecialist.lastname.label('assigned_specialist_lastname'),
             Patient.firstname.label('patient_firstname'),
             Patient.lastname.label('patient_lastname'),
+            Practice.name,
         )
+        .join(Practice, Consult.practice_id == Practice.id)
         .join(
             CreatingProvider,
             Consult.creating_provider_id == CreatingProvider.id
