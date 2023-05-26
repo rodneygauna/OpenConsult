@@ -72,7 +72,40 @@ def all_econsults():
     """Displays all econsults for all practices"""
 
     # Gets all econsults for all practices
-    econsults = Consult.query.order_by(Consult.created_date).all()
+    CreatingProvider = db.aliased(User, name='CreatingProvider')
+    AssignedSpecialist = db.aliased(User, name='AssignedSpecialist')
+
+    econsults = (
+        db.session.query(
+            Consult.id,
+            Consult.patient_id,
+            Consult.practice_id,
+            Consult.creating_provider_id,
+            Consult.assigned_specialist_id,
+            Consult.created_date,
+            Consult.updated_date,
+            Consult.specialty,
+            Consult.status,
+            CreatingProvider.firstname.label('creating_provider_firstname'),
+            CreatingProvider.lastname.label('creating_provider_lastname'),
+            AssignedSpecialist.firstname.label(
+                'assigned_specialist_firstname'),
+            AssignedSpecialist.lastname.label('assigned_specialist_lastname'),
+            Patient.firstname.label('patient_firstname'),
+            Patient.lastname.label('patient_lastname'),
+        )
+        .join(
+            CreatingProvider,
+            Consult.creating_provider_id == CreatingProvider.id
+        )
+        .outerjoin(
+            AssignedSpecialist,
+            Consult.assigned_specialist_id == AssignedSpecialist.id
+        )
+        .join(Patient, Consult.patient_id == Patient.id)
+        .order_by(Consult.created_date.desc())
+        .all()
+    )
 
     return render_template('econsults/all_econsults.html',
                            title='OpenConsult - All eConsults',

@@ -22,7 +22,21 @@
   <tbody>
     {% if econsults %} {% for econsult in econsults %}
     <tr>
-      <td>{{ econsults.id }}</td>
+      <td>{{ econsult.id }}</td>
+      <td>{{ econsult.patient_lastname }}, {{ econsult.patient_firstname }}</td>
+      <td>
+        {{ econsult.creating_provider_lastname }}, {{
+        econsult.creating_provider_firstname }}
+      </td>
+      <td>{{ econsult.specialty }}</td>
+      <td>
+        {% if econsult.assigned_specialist_lastname %} {{
+        econsult.assigned_specialist_lastname }}, {{
+        econsult.assigned_specialist_firstname }} {% else %} {% endif %}
+      </td>
+      <td>{{ econsult.created_date.strftime('%b %d, %Y') }}</td>
+      <td>{{ econsult.updated_date.strftime('%b %d, %Y') }}</td>
+      <td>{{ econsult.status }}</td>
       <td>
         <a href="#" class="button button-secondary">View eConsult</a>
       </td>
