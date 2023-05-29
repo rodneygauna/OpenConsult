@@ -192,6 +192,46 @@ class Consult(db.Model):
         return f"Consult ID: {self.id}"
 
 
+class ConsultAttachment(db.Model):
+    """Consult Attachment model"""
+
+    __tablename__ = 'consult_attachments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    consult_id = db.Column(db.Integer, db.ForeignKey('consults.id'))
+    filename = db.Column(db.String(255), nullable=False)
+
+    def __repr__(self):
+        return f"Consult Attachment ID: {self.id}"
+
+
+class ConsultResponse(db.Model):
+    """Consult Response model"""
+
+    __tablename__ = 'consult_responses'
+
+    # IDs
+    id = db.Column(db.Integer, primary_key=True)
+    consult_id = db.Column(db.Integer, db.ForeignKey('consults.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    # Timestamps
+    created_date = db.Column(
+        db.DateTime, nullable=False, default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+    updated_date = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+    # Response Information
+    comments = db.Column(db.Text)
+    treatment_options = db.Column(db.Text)
+    potential_diagnosis_1 = db.Column(db.Text)
+    potential_diagnosis_2 = db.Column(db.Text)
+    potential_diagnosis_3 = db.Column(db.Text)
+    potential_diagnosis_4 = db.Column(db.Text)
+
+    def __repr__(self):
+        return f"Consult Specialist Response ID: {self.id}"
+
+
 class Specialty(db.Model):
     '''Specialty model'''
 

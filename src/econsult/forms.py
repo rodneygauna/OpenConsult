@@ -7,7 +7,6 @@ eConsult forms for the application.
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
-from src.econsult.dictionaries import CONSULT_STATUS
 
 
 # Form - Add, Edit Consult
