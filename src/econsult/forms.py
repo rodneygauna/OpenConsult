@@ -21,8 +21,9 @@ class ConsultForm(FlaskForm):
         validators=[DataRequired()],
         render_kw={'class': 'u-full-width select2'})
     # TODO: Make this a dropdown
-    specialty = StringField('Specialty*', validators=[DataRequired()],
-                            render_kw={'class': 'u-full-width'})
+    specialty = SelectField('Specialty*', coerce=int,
+                            validators=[DataRequired()],
+                            render_kw={'class': 'u-full-width select2'})
     chief_complaint = TextAreaField(
         'Chief Complaint*', validators=[DataRequired()],
         render_kw={'class': 'u-full-width'})

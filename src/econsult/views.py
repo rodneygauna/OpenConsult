@@ -8,7 +8,14 @@ from datetime import datetime
 from flask import render_template, url_for, flash, redirect, Blueprint
 from flask_login import current_user, login_required
 from src import db
-from src.models import Consult, Patient, User, UserPractice, Practice
+from src.models import (
+    Consult,
+    Patient,
+    User,
+    UserPractice,
+    Practice,
+    Specialty,
+)
 from src.econsult.forms import ConsultForm
 
 
@@ -121,6 +128,12 @@ def add_econsult(practice_id):
     '''Adds a new econsult'''
 
     form = ConsultForm()
+    # Query for specialties
+    specialties = Specialty.query.order_by(Specialty.name).all()
+
+    # List of specialties
+    form.specialty.choices = [(0, 'Select a specialty')] + \
+        [(specialty.id, specialty.name) for specialty in specialties]
 
     # Query for patients in the practice
     patients = Patient.query.filter_by(
