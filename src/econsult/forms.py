@@ -5,7 +5,7 @@ eConsult forms for the application.
 
 # Imports
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SubmitField, TextAreaField
+from wtforms import SelectField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 
 
