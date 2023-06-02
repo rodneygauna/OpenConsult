@@ -297,3 +297,37 @@ def view_econsult(econsult_id):
                            title='OpenConsult - View eConsult',
                            econsult=econsult,
                            responses=responses)
+
+
+# Add response to econsult
+@econsult_bp.route('/econsult/<int:econsult_id>/add_response',
+                   methods=['GET', 'POST'])
+@login_required
+def add_response(econsult_id):
+    """Adds a response to an econsult"""
+
+    form = ConsultResponseForm()
+
+    if form.validate_on_submit():
+        # Commits new response's data to the database
+        response = ConsultResponse(
+            user_id=current_user.id,
+            consult_id=econsult_id,
+            created_date=datetime.now(),
+            comments=form.comments.data,
+            treatment_options=form.treatment_options.data,
+            potential_diagnosis_1=form.potential_diagnosis_1.data,
+            potential_diagnosis_2=form.potential_diagnosis_2.data,
+            potential_diagnosis_3=form.potential_diagnosis_3.data,
+            potential_diagnosis_4=form.potential_diagnosis_4.data
+        )
+        db.session.add(response)
+        db.session.commit()
+        flash('Response submitted successfully.', 'success')
+        return redirect(url_for('econsult.view_econsult',
+                                econsult_id=econsult_id))
+
+    return render_template('econsults/add_response.html',
+                           title='OpenConsult - Add Response',
+                           form=form,
+                           econsult_id=econsult_id)
