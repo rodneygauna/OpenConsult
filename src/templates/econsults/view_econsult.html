@@ -1,3 +1,111 @@
 {% extends "base.html" %} {% block content %}
-<h4>View eConsult</h4>
+<!-- Start Patient Info -->
+<div class="row">
+  <div class="card">
+    <div class="card-header">
+      <strong class="card-title">Patient</strong>
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        {{ econsult.patient_firstname }} {{ econsult.patient_lastname }}
+      </p>
+    </div>
+  </div>
+</div>
+<!-- End Patient Info -->
+<!-- Start Consult Info -->
+<div class="row">
+  <!-- Start Consult Panel-->
+  <div class="one-half column">
+    <div class="card">
+      <div class="card-header">
+        <strong class="card-title">eConsult</strong>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><strong>Consult ID:</strong>{{ econsult.id }}</p>
+        <p class="card-text">
+          <strong>Consult Status:</strong>{{ econsult.status }}
+        </p>
+        <p class="card-text">
+          <strong>Created Date:</strong> {{ econsult.created_date.strftime('%b
+          %d, %Y') }}
+        </p>
+        <p class="card-text">
+          <strong>Last Updated</strong> {{ econsult.updated_date.strftime('%b
+          %d, %Y') }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- End Consult Panel-->
+  <!-- Start Provider/Specialist Info -->
+  <div class="one-half column">
+    <div class="row">
+      <!-- Start Provider Panel -->
+      <div class="row">
+        <div class="card">
+          <div class="card-header">
+            <strong class="card-title">Creating Provider</strong>
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              {{ econsult.creating_provider_firstname }} {{
+              econsult.creating_provider_lastname }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- End Provider Panel -->
+      <!-- Start Specialist Panel -->
+      <div class="row">
+        <div class="card">
+          <div class="card-header">
+            <strong class="card-title">Assigned Specialist</strong>
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              {% if econsult.assigned_specialist_id %} {{
+              econsult.assigned_specialist_firstname }} {{
+              econsult.assigned_specialist_lastname }} {% else %} No specialist
+              assigned.
+            </p>
+            <a href="#" class="card-link">Assign Specialist</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <!-- End Specialist Panel-->
+    </div>
+  </div>
+  <!-- End Provider/Speicalist Info -->
+</div>
+<!-- End Consult Info -->
+<!-- Start Consult Finalized Info -->
+{% if econsult.status == "CLOSED" %}
+<div class="row">
+  <div class="card">
+    <div class="card-header">
+      <strong class="card-title">eConsult Finalized Summary</strong>
+    </div>
+    <div class="card-body">
+      <p class="card-text">This is some sample text within a card body.</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+<!-- End Consult Finalized Info -->
+<!-- Start Consult Responses -->
+<div class="row">
+  <div class="card">
+    <div class="card-header">
+      <strong class="card-title">Responses</strong>
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        {% for response in responses %} {{ response.id }} {% endfor %}
+      </p>
+    </div>
+  </div>
+</div>
+<!-- End Consult Responses -->
 {% endblock content %}

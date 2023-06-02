@@ -248,6 +248,7 @@ def view_econsult(econsult_id):
             Consult.status,
             CreatingProvider.firstname.label('creating_provider_firstname'),
             CreatingProvider.lastname.label('creating_provider_lastname'),
+            AssignedSpecialist.id.label('assigned_specialist_id'),
             AssignedSpecialist.firstname.label(
                 'assigned_specialist_firstname'),
             AssignedSpecialist.lastname.label('assigned_specialist_lastname'),
