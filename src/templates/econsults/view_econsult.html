@@ -101,12 +101,59 @@
       <strong class="card-title">Responses</strong>
     </div>
     <div class="card-body">
+      {% if responses %} {% for response in responses %}
       <p class="card-text">
-        {% if responses %} {% for response in responses %} {{ response.id }} {%
-        endfor %} {% else %} No responses yet. {% endif %}
+        <strong>Comment:</strong>
+        <br />
+        {{ response.comments }}
       </p>
+      {% if response.treatment_options %}
+      <p class="card-text">
+        <strong>Treatment Options:</strong>
+        <br />
+        {{ response.treatment_options }}
+      </p>
+      {% endif %} {% if response.potential_diagnosis_1 and not "None" %}
+      <p class="card-text">
+        <strong>Potential Diagnosis:</strong>
+        <br />
+        {{ response.potential_diagnosis_1 }}
+      </p>
+      {% endif %} {% if response.potential_diagnosis_2 and not "None" %}
+      <p class="card-text">
+        <strong>Potential Diagnosis:</strong>
+        <br />
+        {{ response.potential_diagnosis_2 }}
+      </p>
+      {% endif %} {% if response.potential_diagnosis_3 and not "None" %}
+      <p class="card-text">
+        <strong>Potential Diagnosis:</strong>
+        <br />
+        {{ response.potential_diagnosis_3 }}
+      </p>
+      {% endif %} {% if response.potential_diagnosis_4 and not "None" %}
+      <p class="card-text">
+        <strong>Potential Diagnosis:</strong>
+        <br />
+        {{ response.potential_diagnosis_4 }}
+      </p>
+      {% endif %}
+      <p class="card-text">
+        <strong>Created Date:</strong>
+        <br />
+        {{ response.created_date.strftime('%b %d, %Y') }}
+      </p>
+      <p class="card-text">
+        <strong>Created By:</strong>
+        <br />
+        {{ response.firstname }} {{ response.lastname }}
+      </p>
+      <hr />
+      {% endfor %} {% else %}
+      <p class="card-text">No responses yet.</p>
+      {% endif %}
     </div>
   </div>
+  <!-- End Consult Responses -->
 </div>
-<!-- End Consult Responses -->
 {% endblock content %}

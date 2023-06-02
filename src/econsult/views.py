@@ -308,6 +308,11 @@ def add_response(econsult_id):
 
     form = ConsultResponseForm()
 
+    # If the user clicks the cancel button, redirect to the econsult view page
+    if form.cancel.data:
+        return redirect(url_for('econsult.view_econsult',
+                                econsult_id=econsult_id))
+
     if form.validate_on_submit():
         # Commits new response's data to the database
         response = ConsultResponse(

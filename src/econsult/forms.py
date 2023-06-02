@@ -47,19 +47,20 @@ class ConsultResponseForm(FlaskForm):
     treatment_options = TextAreaField('Treatment Options',
                                       render_kw={'class': 'u-full-width'})
     potential_diagnosis_1 = SelectField(
-        'Potential Diagnosis 1', coerce=int,
+        'Potential Diagnosis 1', coerce=str,
         choices=ICD_10_CM,
         render_kw={'class': 'u-full-width select2'})
     potential_diagnosis_2 = SelectField(
-        'Potential Diagnosis 2', coerce=int,
+        'Potential Diagnosis 2', coerce=str,
         choices=ICD_10_CM,
         render_kw={'class': 'u-full-width select2'})
     potential_diagnosis_3 = SelectField(
-        'Potential Diagnosis 3', coerce=int,
+        'Potential Diagnosis 3', coerce=str,
         choices=ICD_10_CM,
         render_kw={'class': 'u-full-width select2'})
     potential_diagnosis_4 = SelectField(
-        'Potential Diagnosis 4', coerce=int,
+        'Potential Diagnosis 4', coerce=str,
         choices=ICD_10_CM,
         render_kw={'class': 'u-full-width select2'})
     submit = SubmitField('Submit', render_kw={'class': 'button-primary'})
+    cancel = SubmitField('Cancel', render_kw={'formnovalidate': True})

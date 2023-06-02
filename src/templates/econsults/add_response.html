@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block content %}
+<h4>Add Response To eConsult</h4>
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <div class="row">{{ form.comments.label }} {{ form.comments }}</div>
+  <div class="row">
+    {{ form.treatment_options.label }} {{ form.treatment_options }}
+  </div>
+  <div class="row">
+    {{ form.potential_diagnosis_1.label }} {{ form.potential_diagnosis_1 }} {{
+    form.potential_diagnosis_2.label }} {{ form.potential_diagnosis_2 }} {{
+    form.potential_diagnosis_3.label }} {{ form.potential_diagnosis_3 }} {{
+    form.potential_diagnosis_4.label }} {{ form.potential_diagnosis_4 }}
+  </div>
+  <br />
+  {{ form.cancel }} {{ form.submit }}
+</form>
+{% endblock content %}
