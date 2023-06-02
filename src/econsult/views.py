@@ -289,7 +289,7 @@ def view_econsult(econsult_id):
         )
         .join(User, ConsultResponse.user_id == User.id)
         .filter(ConsultResponse.consult_id == econsult_id)
-        .order_by(ConsultResponse.created_date)
+        .order_by(ConsultResponse.created_date.desc())
         .all()
     )
 
