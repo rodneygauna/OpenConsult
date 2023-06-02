@@ -21,7 +21,6 @@ class ConsultForm(FlaskForm):
         'Creating Provider*', coerce=int,
         validators=[DataRequired()],
         render_kw={'class': 'u-full-width select2'})
-    # TODO: Make this a dropdown
     specialty = SelectField('Specialty*', coerce=int,
                             validators=[DataRequired()],
                             render_kw={'class': 'u-full-width select2'})
