@@ -40,7 +40,11 @@
       <td>{{ econsult.updated_date.strftime('%b %d, %Y') }}</td>
       <td>{{ econsult.status }}</td>
       <td>
-        <a href="#" class="button button-secondary">View eConsult</a>
+        <a
+          href="{{ url_for('econsult.view_econsult', econsult_id=econsult.id) }}"
+          class="button button-secondary"
+          >View eConsult</a
+        >
       </td>
     </tr>
     {% endfor %} {% else %}

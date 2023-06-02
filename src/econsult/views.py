@@ -15,8 +15,12 @@ from src.models import (
     UserPractice,
     Practice,
     Specialty,
+    ConsultResponse,
 )
-from src.econsult.forms import ConsultForm
+from src.econsult.forms import (
+    ConsultForm,
+    ConsultResponseForm,
+)
 
 
 # Blueprint
@@ -219,3 +223,76 @@ def add_econsult(practice_id):
                            title='OpenConsult - Add eConsult',
                            form=form,
                            practice_id=practice_id)
+
+
+# View econsult
+@econsult_bp.route('/econsult/<int:econsult_id>')
+@login_required
+def view_econsult(econsult_id):
+    """Displays econsult details and responses"""
+
+    # Get econsult details
+    CreatingProvider = db.aliased(User, name='CreatingProvider')
+    AssignedSpecialist = db.aliased(User, name='AssignedSpecialist')
+
+    econsult = (
+        db.session.query(
+            Consult.id,
+            Consult.patient_id,
+            Consult.practice_id,
+            Consult.creating_provider_id,
+            Consult.assigned_specialist_id,
+            Consult.created_date,
+            Consult.updated_date,
+            Consult.specialty,
+            Consult.status,
+            CreatingProvider.firstname.label('creating_provider_firstname'),
+            CreatingProvider.lastname.label('creating_provider_lastname'),
+            AssignedSpecialist.firstname.label(
+                'assigned_specialist_firstname'),
+            AssignedSpecialist.lastname.label('assigned_specialist_lastname'),
+            Patient.firstname.label('patient_firstname'),
+            Patient.lastname.label('patient_lastname'),
+            Practice.name,
+        )
+        .join(Practice, Consult.practice_id == Practice.id)
+        .join(
+            CreatingProvider,
+            Consult.creating_provider_id == CreatingProvider.id
+        )
+        .outerjoin(
+            AssignedSpecialist,
+            Consult.assigned_specialist_id == AssignedSpecialist.id
+        )
+        .join(Patient, Consult.patient_id == Patient.id)
+        .filter(Consult.id == econsult_id)
+        .first()
+    )
+
+    # Get responses for the econsult
+    responses = (
+        db.session.query(
+            ConsultResponse.id,
+            ConsultResponse.user_id,
+            ConsultResponse.consult_id,
+            ConsultResponse.created_date,
+            ConsultResponse.updated_date,
+            ConsultResponse.comments,
+            ConsultResponse.treatment_options,
+            ConsultResponse.potential_diagnosis_1,
+            ConsultResponse.potential_diagnosis_2,
+            ConsultResponse.potential_diagnosis_3,
+            ConsultResponse.potential_diagnosis_4,
+            User.firstname,
+            User.lastname,
+        )
+        .join(User, ConsultResponse.user_id == User.id)
+        .filter(ConsultResponse.consult_id == econsult_id)
+        .order_by(ConsultResponse.created_date)
+        .all()
+    )
+
+    return render_template('econsults/view_econsult.html',
+                           title='OpenConsult - View eConsult',
+                           econsult=econsult,
+                           responses=responses)
