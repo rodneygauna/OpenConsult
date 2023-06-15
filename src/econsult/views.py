@@ -55,6 +55,7 @@ def econsults(practice_id):
             AssignedSpecialist.lastname.label('assigned_specialist_lastname'),
             Patient.firstname.label('patient_firstname'),
             Patient.lastname.label('patient_lastname'),
+            Specialty.name.label('specialty_name'),
         )
         .filter(Consult.practice_id == practice_id)
         .join(
@@ -66,6 +67,7 @@ def econsults(practice_id):
             Consult.assigned_specialist_id == AssignedSpecialist.id
         )
         .join(Patient, Consult.patient_id == Patient.id)
+        .join(Specialty, Consult.specialty == Specialty.id)
         .order_by(Consult.created_date.desc())
         .all()
     )
@@ -105,6 +107,7 @@ def all_econsults():
             Patient.firstname.label('patient_firstname'),
             Patient.lastname.label('patient_lastname'),
             Practice.name,
+            Specialty.name.label('specialty_name'),
         )
         .join(Practice, Consult.practice_id == Practice.id)
         .join(
@@ -116,6 +119,7 @@ def all_econsults():
             Consult.assigned_specialist_id == AssignedSpecialist.id
         )
         .join(Patient, Consult.patient_id == Patient.id)
+        .join(Specialty, Consult.specialty == Specialty.id)
         .order_by(Consult.created_date.desc())
         .all()
     )
