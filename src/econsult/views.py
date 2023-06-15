@@ -259,6 +259,7 @@ def view_econsult(econsult_id):
             Patient.firstname.label('patient_firstname'),
             Patient.lastname.label('patient_lastname'),
             Practice.name,
+            Specialty.name.label('specialty_name'),
         )
         .join(Practice, Consult.practice_id == Practice.id)
         .join(
@@ -270,6 +271,7 @@ def view_econsult(econsult_id):
             Consult.assigned_specialist_id == AssignedSpecialist.id
         )
         .join(Patient, Consult.patient_id == Patient.id)
+        .join(Specialty, Consult.specialty == Specialty.id)
         .filter(Consult.id == econsult_id)
         .first()
     )

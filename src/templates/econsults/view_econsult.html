@@ -31,8 +31,11 @@
           %d, %Y') }}
         </p>
         <p class="card-text">
-          <strong>Last Updated</strong> {{ econsult.updated_date.strftime('%b
+          <strong>Last Updated:</strong> {{ econsult.updated_date.strftime('%b
           %d, %Y') }}
+        </p>
+        <p class="card-text">
+          <strong>Specialty:</strong> {{ econsult.specialty_name }}
         </p>
       </div>
     </div>
@@ -113,31 +116,35 @@
         <br />
         {{ response.treatment_options }}
       </p>
-      {% endif %} {% if response.potential_diagnosis_1 and not "None" %}
+      {% endif %} {% if response.potential_diagnosis_1 == "None" %} {% elif
+      response.potential_diagnosis_1 %}
       <p class="card-text">
         <strong>Potential Diagnosis:</strong>
         <br />
         {{ response.potential_diagnosis_1 }}
       </p>
-      {% endif %} {% if response.potential_diagnosis_2 and not "None" %}
+      {% else %} {% endif %} {% if response.potential_diagnosis_2 == "None" %}
+      {% elif response.potential_diagnosis_2 %}
       <p class="card-text">
         <strong>Potential Diagnosis:</strong>
         <br />
         {{ response.potential_diagnosis_2 }}
       </p>
-      {% endif %} {% if response.potential_diagnosis_3 and not "None" %}
+      {% else %} {% endif %} {% if response.potential_diagnosis_3 == "None" %}
+      {% elif response.potential_diagnosis_3 %}
       <p class="card-text">
         <strong>Potential Diagnosis:</strong>
         <br />
         {{ response.potential_diagnosis_3 }}
       </p>
-      {% endif %} {% if response.potential_diagnosis_4 and not "None" %}
+      {% else %} {% endif %} {% if response.potential_diagnosis_4 == "None" %}
+      {% elif response.potential_diagnosis_4 %}
       <p class="card-text">
         <strong>Potential Diagnosis:</strong>
         <br />
         {{ response.potential_diagnosis_4 }}
       </p>
-      {% endif %}
+      {% else %} {% endif %}
       <p class="card-text">
         <strong>Created Date:</strong>
         <br />
