@@ -14,6 +14,9 @@ from src.models import (
     Patient,
     Practice,
     UserPractice,
+    Specialty,
+    Consult,
+    ConsultResponse,
 )
 from src.dictionaries.dict_patient import (
     PATIENT_SEX,
@@ -28,6 +31,12 @@ from src.dictionaries.dict_general import (
 from src.dictionaries.dict_street import (
     STREET_PREFIX_SUFFIX,
     STREET_TYPE_CHOICES,
+)
+from src.econsult.dictionaries import (
+    CONSULT_STATUS,
+)
+from src.icd10.dictionaries import (
+    ICD_10_CM,
 )
 
 
@@ -140,6 +149,50 @@ def db_seed():
             state=faker.state_abbr(),
             zipcode=faker.postcode(),
             practice_id=random.randint(1, 10)
+        ))
+
+    # Create specialties
+    for i in range(1, 11):
+        data.append(Specialty(
+            name=random.choices(
+                ['Cardiology', 'Dermatology', 'Endocrinology',
+                 'Family Medicine', 'Gastroenterology', 'General Surgery',
+                 'Internal Medicine', 'Neurology',
+                 'Obstetrics and Gynecology', 'Oncology', 'Ophthalmology',
+                 'Orthopedic Surgery', 'Otolaryngology', 'Pediatrics',
+                 'Psychiatry', 'Pulmonology', 'Radiology', 'Urology']
+            )[0],
+            description=faker.paragraph(),
+        ))
+
+    # Create consults
+    for i in range(1, 1001):
+        data.append(Consult(
+            patient_id=random.randint(1, 1000),
+            practice_id=random.randint(1, 10),
+            creating_provider_id=random.randint(1, 50),
+            status=random.choice([item[0] for item in CONSULT_STATUS]),
+            specialty=random.randint(1, 10),
+            chief_complaint=faker.paragraph(),
+            comments_to_specialist=faker.paragraph(),
+            main_question=faker.paragraph(),
+        ))
+
+    # Create consult responses
+    for i in range(1, 1001):
+        data.append(ConsultResponse(
+            consult_id=random.randint(1, 1000),
+            user_id=random.randint(1, 50),
+            comments=faker.paragraph(),
+            treatment_options=faker.paragraph(),
+            potential_diagnosis_1=random.choice(
+                [item[0] for item in ICD_10_CM]),
+            potential_diagnosis_2=random.choice(
+                [item[0] for item in ICD_10_CM]),
+            potential_diagnosis_3=random.choice(
+                [item[0] for item in ICD_10_CM]),
+            potential_diagnosis_4=random.choice(
+                [item[0] for item in ICD_10_CM]),
         ))
 
     # Add data to the database
