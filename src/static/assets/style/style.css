@@ -33,6 +33,13 @@ main {
     padding: 1rem;
 }
 
+@media (max-width: 425px) {
+    main {
+        margin-left: 0;
+        padding-top: 3.5rem;
+    }
+}
+
 /* Navbar */
 .topbar {
     position: fixed;
@@ -116,6 +123,21 @@ main {
 
 .topbar-link-text {
     margin-left: 1rem;
+}
+
+@media (max-width: 425px) {
+    .topbar {
+        height: 3.5rem;
+    }
+    .topbar img {
+        height: 3.5rem;
+    }
+    .topbar-link {
+        height: 3.5rem;
+    }
+    .topbar-link-text {
+        display: none;
+    }
 }
 
 /* Banner */
