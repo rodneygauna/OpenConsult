@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import {
   requiredStringMaxLength,
   optionalStringMaxLength,
-  requiredNumberMinMax,
+  requiredPhoneNumber,
   requiredEnum,
   optionalEnum,
 } from "../utils/validation/validationConstants.js";
@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
     last_name: requiredStringMaxLength("Last name", 255),
     suffix: optionalEnum(["Jr", "Sr", "I", "II", "III", "IV", "V"]),
     // User Contact Information
-    phone_number: requiredNumberMinMax("Phone number", 1000000000, 9999999999),
+    phone_number: requiredPhoneNumber(),
     // User Email and Password Hash
     email: {
       type: String,
