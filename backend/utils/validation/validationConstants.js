@@ -102,8 +102,14 @@ export const optionalDate = () => ({
 });
 
 // Required relational link (foreign keys)
-export const requireRef = (fieldName, refTable) => ({
+export const requireRef = (refTable) => ({
   type: Schema.Types.ObjectId,
   ref: refTable,
-  required: [true, `${fieldName} is required`],
+  required: [true, `${refTable} is required`],
+});
+
+// Optional relational link (foreign keys)
+export const optionalRef = (refTable) => ({
+  type: Schema.Types.ObjectId,
+  ref: refTable,
 });
