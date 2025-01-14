@@ -70,7 +70,7 @@ const patientSchema = new mongoose.Schema(
       "Not listed",
     ]),
     // Practice Reference
-    practice: requireRef("Practice"),
+    practice_id: requireRef("Practice"),
   },
   {
     timestamps: true,
