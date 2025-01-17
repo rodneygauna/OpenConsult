@@ -33,6 +33,17 @@ const consultSchema = new mongoose.Schema(
     chief_complaint: requiredString("Chief complaint"),
     comments_to_specialist: optionalString(),
     main_question: requiredString("Main question"),
+    // Consult Attachments
+    attachments: [
+      {
+        // Attachment Name
+        name: requiredString("Attachment name"),
+        // Attachment URL
+        url: requiredString("Attachment URL"),
+        // Attachment Author Reference
+        author_id: requireRef("User"),
+      },
+    ],
     // Patient Reference
     patient_id: requireRef("Patient"),
     // Practice Reference
@@ -41,6 +52,8 @@ const consultSchema = new mongoose.Schema(
     creating_provider_id: requireRef("User"),
     // Assigned Specialist Reference
     assigned_specialist_id: requireRef("User"),
+    // Consult Conversation Reference
+    conversation_id: [requireRef("ConsultConversation")],
   },
   { timestamps: true }
 );
