@@ -6,6 +6,7 @@ import {
   optionalString,
   requiredEnum,
   requireRef,
+  optionalRef,
 } from "../utils/validation/validationConstants.js";
 
 const consultSchema = new mongoose.Schema(
@@ -51,9 +52,11 @@ const consultSchema = new mongoose.Schema(
     // Creating Provider Reference
     creating_provider_id: requireRef("User"),
     // Assigned Specialist Reference
-    assigned_specialist_id: requireRef("User"),
+    assigned_specialist_id: optionalRef("User"),
     // Consult Conversation Reference
-    conversation_id: [requireRef("ConsultConversation")],
+    conversation_id: [optionalRef("ConsultConversation")],
+    // Consult Result Reference
+    result_id: optionalRef("ConsultResult"),
   },
   { timestamps: true }
 );
