@@ -1,9 +1,7 @@
 import asyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
-import mongoose from "mongoose";
 
 import User from "../models/userModel.js";
-import Department from "../models/departmentModel.js";
 
 import generateToken from "../utils/generateToken.js";
 
