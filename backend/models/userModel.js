@@ -6,6 +6,7 @@ import {
   requiredPhoneNumber,
   requiredEnum,
   optionalEnum,
+  optionalRef,
 } from "../utils/validation/validationConstants.js";
 
 const userSchema = new mongoose.Schema(
@@ -39,6 +40,8 @@ const userSchema = new mongoose.Schema(
     ]),
     // User Type
     user_type: requiredEnum("User type", ["User", "Super User", "Admin"]),
+    // User Practice Reference
+    practice_id: optionalRef("Practice"),
   },
   {
     timestamps: true,
