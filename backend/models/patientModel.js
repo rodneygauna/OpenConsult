@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 import {
+  requiredString,
   requiredStringMaxLength,
   optionalString,
   requiredDate,
@@ -14,9 +15,9 @@ import {
 const patientSchema = new mongoose.Schema(
   {
     // Patient Name
-    first_name: requiredStringMaxLength("First name", 255),
+    first_name: requiredString("First name"),
     middle_name: optionalString(),
-    last_name: requiredStringMaxLength("Last name", 255),
+    last_name: requiredString("Last name"),
     suffix: optionalString(),
     // Patient Date of Birth
     date_of_birth: requiredDate("Date of birth"),
@@ -26,7 +27,7 @@ const patientSchema = new mongoose.Schema(
     work_number: optionalPhoneNumber(),
     email: optionalString(),
     // Patient Address
-    address: requiredStringMaxLength("Address", 255),
+    address: requiredString("Address"),
     apartment_unit_room: optionalString(),
     po_box_address: optionalString(),
     city: requiredStringMaxLength("City", 255),

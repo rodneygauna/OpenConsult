@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 import {
+  requiredString,
   requiredStringMaxLength,
   optionalString,
   requiredNumberMinMax,
@@ -11,9 +12,9 @@ import {
 const practiceSchema = new mongoose.Schema(
   {
     // Practice Name
-    practice_name: requiredStringMaxLength("Practice name", 255),
+    practice_name: requiredString("Practice name"),
     // Practice Address
-    address: requiredStringMaxLength("Address", 255),
+    address: requiredString("Address"),
     suite_unit_number: optionalString(),
     po_box_address: optionalString(),
     city: requiredStringMaxLength("City", 255),

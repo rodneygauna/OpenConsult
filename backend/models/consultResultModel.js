@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
 
 import {
-  requiredStringMaxLength,
   requiredString,
   optionalString,
-  requiredEnum,
   requireRef,
 } from "../utils/validation/validationConstants.js";
 

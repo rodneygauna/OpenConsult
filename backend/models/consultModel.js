@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 import {
-  requiredStringMaxLength,
+  requiredString,
   requiredString,
   optionalString,
   requiredEnum,
@@ -30,7 +30,7 @@ const consultSchema = new mongoose.Schema(
       "Emergent", // Emergent consult
     ]),
     // Consult Information
-    specialty: requiredStringMaxLength("Specialty", 255),
+    specialty: requiredString("Specialty"),
     chief_complaint: requiredString("Chief complaint"),
     comments_to_specialist: optionalString(),
     main_question: requiredString("Main question"),

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 import {
-  requiredStringMaxLength,
+  requiredString,
   optionalStringMaxLength,
   requiredPhoneNumber,
   requiredEnum,
@@ -11,9 +11,9 @@ import {
 const userSchema = new mongoose.Schema(
   {
     // User Demographics
-    first_name: requiredStringMaxLength("First name", 255),
+    first_name: requiredString("First name"),
     middle_name: optionalStringMaxLength(255),
-    last_name: requiredStringMaxLength("Last name", 255),
+    last_name: requiredString("Last name"),
     suffix: optionalEnum(["Jr", "Sr", "I", "II", "III", "IV", "V"]),
     // User Contact Information
     phone_number: requiredPhoneNumber(),
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
     },
-    password_hash: requiredStringMaxLength("Password hash", 1024),
+    password_hash: requiredString("Password hash"),
     // User Status
     is_active: {
       type: Boolean,
