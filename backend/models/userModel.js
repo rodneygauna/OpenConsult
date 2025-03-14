@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema(
     ]),
     // User Type
     user_type: requiredEnum("User type", ["User", "Super User", "Admin"]),
-    // User Practice Reference
+    // Reference to Practice
     practice_id: optionalRef("Practice"),
   },
   {

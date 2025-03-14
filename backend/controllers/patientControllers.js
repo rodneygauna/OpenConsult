@@ -5,7 +5,7 @@ import Patient from "../models/patientModel.js";
 // @desc    Get all patients
 // @route   GET /api/v1/patients
 // @access  Private
-const getPatients = asyncHandler(async (req, res) => {
+export const getPatients = asyncHandler(async (req, res) => {
   const patients = await Patient.find({});
   res.json(patients);
 });
@@ -13,7 +13,7 @@ const getPatients = asyncHandler(async (req, res) => {
 // @desc    Get patient by ID
 // @route   GET /api/v1/patients/:id
 // @access  Private
-const getPatientById = asyncHandler(async (req, res) => {
+export const getPatientById = asyncHandler(async (req, res) => {
   const patient = await Patient.findById(req.params.id);
 
   if (patient) {
@@ -27,7 +27,7 @@ const getPatientById = asyncHandler(async (req, res) => {
 // @desc    Create new patient
 // @route   POST /api/v1/patients
 // @access  Private
-const createPatient = asyncHandler(async (req, res) => {
+export const createPatient = asyncHandler(async (req, res) => {
   const patient = new Patient({
     ...req.body,
   });
@@ -39,7 +39,7 @@ const createPatient = asyncHandler(async (req, res) => {
 // @desc    Update patient
 // @route   PUT /api/v1/patients/:id
 // @access  Private
-const updatePatient = asyncHandler(async (req, res) => {
+export const updatePatient = asyncHandler(async (req, res) => {
   const patient = await Patient.findById(req.params.id);
 
   if (patient) {
@@ -61,7 +61,7 @@ const updatePatient = asyncHandler(async (req, res) => {
 // @desc    Delete patient
 // @route   DELETE /api/v1/patients/:id
 // @access  Private
-const deletePatient = asyncHandler(async (req, res) => {
+export const deletePatient = asyncHandler(async (req, res) => {
   const patient = await Patient.findById(req.params.id);
 
   if (patient) {

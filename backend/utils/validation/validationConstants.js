@@ -1,3 +1,5 @@
+import { Schema } from "mongoose";
+
 // Required string
 export const requiredString = (fieldName) => ({
   type: String,

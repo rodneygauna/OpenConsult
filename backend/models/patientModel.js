@@ -9,6 +9,7 @@ import {
   optionalEnum,
   requiredPhoneNumber,
   optionalPhoneNumber,
+  requiredNumberMinMax,
   requireRef,
 } from "../utils/validation/validationConstants.js";
 

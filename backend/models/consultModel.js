@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 import {
   requiredString,
-  requiredString,
   optionalString,
   requiredEnum,
   requireRef,
@@ -61,4 +60,4 @@ const consultSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Consult = mongoose.model("Consult", consultSchema);
+export default mongoose.model("Consult", consultSchema);
