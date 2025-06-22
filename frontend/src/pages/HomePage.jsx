@@ -5,8 +5,8 @@ import NavbarComponent from "../components/Navbar.jsx";
 const HomePage = () => {
   return (
     <div>
+      <NavbarComponent />
       <div className="container">
-        <NavbarComponent />
         <h1>Welcome to MyApp</h1>
         <p>This is the home page of your application.</p>
       </div>
