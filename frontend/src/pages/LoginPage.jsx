@@ -9,7 +9,11 @@ import {
   Button,
   Alert,
 } from "react-bootstrap";
+
+// Import custom hooks
 import { useAuth } from "../hooks/useAuth";
+
+// Import custom components
 import NavbarComponent from "../components/Navbar";
 
 const LoginPage = () => {
@@ -45,7 +49,7 @@ const LoginPage = () => {
       <NavbarComponent />
       <Container>
         <Row className="justify-content-center">
-          <Col md={6} lg={4}>
+          <Col md={6} lg={6}>
             <Card>
               <Card.Header>
                 <h4 className="text-center mb-0">Login to OpenConsult</h4>
