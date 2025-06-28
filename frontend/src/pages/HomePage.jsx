@@ -7,8 +7,8 @@ const HomePage = () => {
     <div>
       <NavbarComponent />
       <div className="container">
-        <h1>Welcome to MyApp</h1>
-        <p>This is the home page of your application.</p>
+        <h1>Welcome to OpenConsult</h1>
+        <p>This is the home page.</p>
       </div>
     </div>
   );
