@@ -11,10 +11,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Error handling
-app.use(notFound);
-app.use(errorHandler);
-
 // Routes - Users
 import userRoutes from "./routes/userRoutes.js";
 app.use("/api/v1/users", userRoutes);
@@ -27,5 +23,9 @@ app.use("/api/v1/patients", patientRoutes);
 // Routes - Consults
 import consultRoutes from "./routes/consultRoutes.js";
 app.use("/api/v1/consults", consultRoutes);
+
+// Error handling (must come after routes)
+app.use(notFound);
+app.use(errorHandler);
 
 export default app;
