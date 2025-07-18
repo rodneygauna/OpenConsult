@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+
+// Import Bootstrap components
 import {
   Container,
   Row,
@@ -9,6 +11,8 @@ import {
   Button,
   Alert,
 } from "react-bootstrap";
+
+// Import custom hooks and components
 import { useAuth } from "../hooks/useAuth";
 import NavbarComponent from "../components/Navbar";
 
