@@ -8,8 +8,13 @@ import { useAuth } from "../hooks/useAuth";
 
 // Navbar Component
 const NavbarComponent = () => {
+  // Path to logo image
+  const logoPath = "../src/public/images/logos/OpenConsult_logo_48x48.png";
+
+  // Get user authentication state
   const { user, isAuthenticated, logout, loading } = useAuth();
 
+  // Handle logout action
   const handleLogout = () => {
     logout();
   };
@@ -21,7 +26,7 @@ const NavbarComponent = () => {
         <div className="container">
           <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
             <img
-              src="../src/public/images/logos/OpenConsult_logo_48x48.png"
+              src={logoPath}
               alt="OpenConsult Logo"
               className="d-inline-block me-2"
             />
@@ -32,12 +37,13 @@ const NavbarComponent = () => {
     );
   }
 
+  // Render Navbar
   return (
     <Navbar bg="light" expand="lg" className="mb-4">
       <div className="container">
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img
-            src="../src/public/images/logos/OpenConsult_logo_48x48.png"
+            src={logoPath}
             alt="OpenConsult Logo"
             className="d-inline-block me-2"
           />
