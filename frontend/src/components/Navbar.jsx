@@ -19,8 +19,13 @@ const NavbarComponent = () => {
     return (
       <Navbar bg="light" expand="lg" className="mb-4">
         <div className="container">
-          <Navbar.Brand as={Link} to="/">
-            OpenConsult
+          <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
+            <img
+              src="../src/public/images/logos/OpenConsult_logo_48x48.png"
+              alt="OpenConsult Logo"
+              className="d-inline-block me-2"
+            />
+            <span>OpenConsult</span>
           </Navbar.Brand>
         </div>
       </Navbar>
@@ -30,8 +35,13 @@ const NavbarComponent = () => {
   return (
     <Navbar bg="light" expand="lg" className="mb-4">
       <div className="container">
-        <Navbar.Brand as={Link} to="/">
-          OpenConsult
+        <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
+          <img
+            src="../src/public/images/logos/OpenConsult_logo_48x48.png"
+            alt="OpenConsult Logo"
+            className="d-inline-block me-2"
+          />
+          <span>OpenConsult</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
