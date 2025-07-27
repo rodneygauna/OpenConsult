@@ -10,7 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_27_223505) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_27_223619) do
+  create_table "patients", force: :cascade do |t|
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
+    t.string "suffix"
+    t.date "date_of_birth"
+    t.string "mobile_number"
+    t.string "home_number"
+    t.string "work_number"
+    t.string "email"
+    t.string "address"
+    t.string "apartment_number"
+    t.string "po_box"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "sex"
+    t.string "gender_identity"
+    t.string "sexual_orientation"
+    t.integer "practice_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["practice_id"], name: "index_patients_on_practice_id"
+  end
+
   create_table "practices", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -44,5 +69,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_27_223505) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "patients", "practices"
   add_foreign_key "sessions", "users"
 end

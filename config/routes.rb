@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :patients
   resources :practices
   resource :session
   resources :passwords, param: :token
