@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_27_224205) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_27_225354) do
   create_table "consult_conversations", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "consult_id", null: false
@@ -104,7 +104,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_27_224205) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
+    t.string "suffix"
+    t.string "phone_number"
+    t.string "phone_type"
+    t.integer "role"
+    t.integer "practice_id", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
+    t.index ["practice_id"], name: "index_users_on_practice_id"
   end
 
   add_foreign_key "consult_conversations", "consults"
@@ -114,4 +123,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_27_224205) do
   add_foreign_key "consults", "practices"
   add_foreign_key "patients", "practices"
   add_foreign_key "sessions", "users"
+  add_foreign_key "users", "practices"
 end
