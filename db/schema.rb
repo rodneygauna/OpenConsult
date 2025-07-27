@@ -10,7 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_27_223619) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_27_224205) do
+  create_table "consult_conversations", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "consult_id", null: false
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["consult_id"], name: "index_consult_conversations_on_consult_id"
+    t.index ["user_id"], name: "index_consult_conversations_on_user_id"
+  end
+
+  create_table "consult_results", force: :cascade do |t|
+    t.integer "consult_id", null: false
+    t.integer "specialist_id"
+    t.text "conclusion"
+    t.string "diagnoses"
+    t.text "treatment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["consult_id"], name: "index_consult_results_on_consult_id"
+  end
+
+  create_table "consults", force: :cascade do |t|
+    t.integer "status"
+    t.integer "priority"
+    t.string "specialty"
+    t.text "chief_complaint"
+    t.text "comments_to_specialist"
+    t.text "main_question"
+    t.integer "patient_id", null: false
+    t.integer "practice_id", null: false
+    t.integer "provider_id"
+    t.integer "specialist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_consults_on_patient_id"
+    t.index ["practice_id"], name: "index_consults_on_practice_id"
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string "first_name"
     t.string "middle_name"
@@ -69,6 +107,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_27_223619) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "consult_conversations", "consults"
+  add_foreign_key "consult_conversations", "users"
+  add_foreign_key "consult_results", "consults"
+  add_foreign_key "consults", "patients"
+  add_foreign_key "consults", "practices"
   add_foreign_key "patients", "practices"
   add_foreign_key "sessions", "users"
 end
