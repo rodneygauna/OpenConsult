@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :consult_conversations
   resources :consults
   resources :patients
   resources :practices

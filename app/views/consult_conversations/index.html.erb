@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Consult conversations" %>
+
+<h1>Consult conversations</h1>
+
+<div id="consult_conversations">
+  <% @consult_conversations.each do |consult_conversation| %>
+    <%= render consult_conversation %>
+    <p>
+      <%= link_to "Show this consult conversation", consult_conversation %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New consult conversation", new_consult_conversation_path %>
