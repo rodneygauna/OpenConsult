@@ -1,0 +1,67 @@
+<%= form_with(model: consult) do |form| %>
+  <% if consult.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(consult.errors.count, "error") %> prohibited this consult from being saved:</h2>
+
+      <ul>
+        <% consult.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.number_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :priority, style: "display: block" %>
+    <%= form.number_field :priority %>
+  </div>
+
+  <div>
+    <%= form.label :specialty, style: "display: block" %>
+    <%= form.text_field :specialty %>
+  </div>
+
+  <div>
+    <%= form.label :chief_complaint, style: "display: block" %>
+    <%= form.textarea :chief_complaint %>
+  </div>
+
+  <div>
+    <%= form.label :comments_to_specialist, style: "display: block" %>
+    <%= form.textarea :comments_to_specialist %>
+  </div>
+
+  <div>
+    <%= form.label :main_question, style: "display: block" %>
+    <%= form.textarea :main_question %>
+  </div>
+
+  <div>
+    <%= form.label :patient_id, style: "display: block" %>
+    <%= form.text_field :patient_id %>
+  </div>
+
+  <div>
+    <%= form.label :practice_id, style: "display: block" %>
+    <%= form.text_field :practice_id %>
+  </div>
+
+  <div>
+    <%= form.label :provider_id, style: "display: block" %>
+    <%= form.number_field :provider_id %>
+  </div>
+
+  <div>
+    <%= form.label :specialist_id, style: "display: block" %>
+    <%= form.number_field :specialist_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

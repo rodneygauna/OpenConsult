@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: 1
+  priority: 1
+  specialty: MyString
+  chief_complaint: MyText
+  comments_to_specialist: MyText
+  main_question: MyText
+  patient: one
+  practice: one
+  provider_id: 1
+  specialist_id: 1
+
+two:
+  status: 1
+  priority: 1
+  specialty: MyString
+  chief_complaint: MyText
+  comments_to_specialist: MyText
+  main_question: MyText
+  patient: two
+  practice: two
+  provider_id: 1
+  specialist_id: 1
