@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  consult: one
+  specialist_id: 1
+  conclusion: MyText
+  diagnoses: MyString
+  treatment: MyText
+
+two:
+  consult: two
+  specialist_id: 1
+  conclusion: MyText
+  diagnoses: MyString
+  treatment: MyText

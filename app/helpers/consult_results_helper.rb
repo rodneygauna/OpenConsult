@@ -1,0 +1,2 @@
+module ConsultResultsHelper
+end

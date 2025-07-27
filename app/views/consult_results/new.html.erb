@@ -1,0 +1,11 @@
+<% content_for :title, "New consult result" %>
+
+<h1>New consult result</h1>
+
+<%= render "form", consult_result: @consult_result %>
+
+<br>
+
+<div>
+  <%= link_to "Back to consult results", consult_results_path %>
+</div>
