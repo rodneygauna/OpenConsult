@@ -17,7 +17,7 @@ class User < ApplicationRecord
   # User: Default User
   # Super User: Has elvated prvledges, e.g., the office manager has access to specific settings
   # Admin: Is the administrator of the app and has full access to everything
-  enum role: { user: 0, super_user: 1, admin: 2 }
+  enum :role, { user: "user", super_user: "super_user", admin: "admin" }
 
   # Utility method
   def full_name

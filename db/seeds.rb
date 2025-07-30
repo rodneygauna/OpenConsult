@@ -9,18 +9,26 @@
 #   end
 
 # Practices
-primaryPractice1 = Practice.create!(name: "Primary Health Practice", city: "San Diego", state: "CA", zip: "92121")
-specialPractice1 = Practice.create!(name: "Specialist Practice", city: "San Diego", state: "CA", zip: "92121")
+primaryPractice1 = Practice.find_or_create_by!(name: "Primary Health Practice", city: "San Diego", state: "CA", zip: "92121")
+specialPractice1 = Practice.find_or_create_by!(name: "Specialist Practice", city: "San Diego", state: "CA", zip: "92121")
 
 # Users
-primaryUser1 = User.create!(
-  first_name: "Alex", last_name: "Smith", role: :user,
-  email_address: "alex@example.com", password: "password", practice: primaryPractice1
-)
+User.find_or_create_by!(email_address: "alex@example.com") do |user|
+  user.first_name = "Alex"
+  user.last_name = "Smith"
+  user.role = :user
+  user.password = "password"
+  user.practice = primaryPractice1
+end
 
-specialistUser1 = User.create!(
-  first_name: "Jordan", last_name: "Lee", role: :user,
-  email_address: "jordan@example.com", password: "password", practice: specialPractice1
-)
+User.find_or_create_by!(email_address: "jordan@example.com") do |user|
+  user.first_name = "Jordan"
+  user.last_name = "Lee"
+  user.role = :user
+  user.password = "password"
+  user.practice = specialPractice1
+end
 
-Patient.create!(first_name: "Sam", last_name: "Jones", practice: primaryPractice1, date_of_birth: "1980-05-01")
+Patient.find_or_create_by!(
+  first_name: "Sam", last_name: "Jones", practice: primaryPractice1, date_of_birth: "1980-05-01"
+)
