@@ -1,0 +1,2 @@
+module ConsultConversationsHelper
+end

@@ -1,0 +1,32 @@
+<%= form_with(model: consult_conversation) do |form| %>
+  <% if consult_conversation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(consult_conversation.errors.count, "error") %> prohibited this consult_conversation from being saved:</h2>
+
+      <ul>
+        <% consult_conversation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :consult_id, style: "display: block" %>
+    <%= form.text_field :consult_id %>
+  </div>
+
+  <div>
+    <%= form.label :message, style: "display: block" %>
+    <%= form.textarea :message %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

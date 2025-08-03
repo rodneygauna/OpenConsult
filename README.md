@@ -1,2 +1,3 @@
 # OpenConsult
-Open source eConsult platform
+
+More information coming soon.

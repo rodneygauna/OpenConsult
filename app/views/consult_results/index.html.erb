@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Consult results" %>
+
+<h1>Consult results</h1>
+
+<div id="consult_results">
+  <% @consult_results.each do |consult_result| %>
+    <%= render consult_result %>
+    <p>
+      <%= link_to "Show this consult result", consult_result %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New consult result", new_consult_result_path %>
