@@ -59,9 +59,9 @@ const PracticesListAllPage = () => {
                     <Card.Text>{practice.address}</Card.Text>
                     <Button
                       variant="primary"
-                      onClick={() => navigate(`/practices/${practice.id}`)}
+                      onClick={() => navigate(`/practices/edit/${practice.id}`)}
                     >
-                      View Details
+                      Edit Practice
                     </Button>
                   </Card.Body>
                 </Card>
