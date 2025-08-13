@@ -97,7 +97,11 @@ const PracticeAddPage = () => {
     setLoading(true);
 
     try {
-      const response = await apiV1.post("/practices", formData);
+      const response = await apiV1.post("/practices", formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       console.log("Practice created successfully:", response.data);
       navigate("/practices");
     } catch (error) {
