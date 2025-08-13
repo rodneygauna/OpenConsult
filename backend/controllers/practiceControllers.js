@@ -73,7 +73,7 @@ export const deletePractice = asyncHandler(async (req, res) => {
 
   if (practice) {
     await practice.remove();
-    res.status(201).json({ message: "Practice removed" });
+    res.status(204).json({ message: "Practice removed" });
   } else {
     res.status(404);
     throw new Error("Practice not found");

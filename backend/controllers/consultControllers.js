@@ -7,7 +7,7 @@ import Consult from "../models/consultModel.js";
 // @access  Private
 export const getConsults = asyncHandler(async (req, res) => {
   const consults = await Consult.find({});
-  res.json(consults);
+  res.status(200).json(consults);
 });
 
 // @desc    Get consults by patient ID
@@ -15,7 +15,13 @@ export const getConsults = asyncHandler(async (req, res) => {
 // @access  Private
 export const getConsultsByPatientId = asyncHandler(async (req, res) => {
   const consults = await Consult.find({ patient: req.params.id });
-  res.json(consults);
+
+  if (consults) {
+    res.status(200).json(consults);
+  } else {
+    res.status(404);
+    throw new Error("Consults not found");
+  }
 });
 
 // @desc    Get consults by creating provider ID
@@ -23,7 +29,7 @@ export const getConsultsByPatientId = asyncHandler(async (req, res) => {
 // @access  Private
 export const getConsultsByProviderId = asyncHandler(async (req, res) => {
   const consults = await Consult.find({ creating_provider: req.params.id });
-  res.json(consults);
+  res.status(200).json(consults);
 });
 
 // @desc    Get consults by assigned specialist ID
@@ -31,7 +37,7 @@ export const getConsultsByProviderId = asyncHandler(async (req, res) => {
 // @access  Private
 export const getConsultsBySpecialistId = asyncHandler(async (req, res) => {
   const consults = await Consult.find({ assigned_specialist: req.params.id });
-  res.json(consults);
+  res.status(200).json(consults);
 });
 
 // @desc    Get consults by practice ID
@@ -39,7 +45,7 @@ export const getConsultsBySpecialistId = asyncHandler(async (req, res) => {
 // @access  Private
 export const getConsultsByPracticeId = asyncHandler(async (req, res) => {
   const consults = await Consult.find({ practice: req.params.id });
-  res.json(consults);
+  res.status(200).json(consults);
 });
 
 // @desc    Get consult by ID
@@ -49,7 +55,7 @@ export const getConsultById = asyncHandler(async (req, res) => {
   const consult = await Consult.findById(req.params.id);
 
   if (consult) {
-    res.json(consult);
+    res.status(200).json(consult);
   } else {
     res.status(404);
     throw new Error("Consult not found");
@@ -83,7 +89,7 @@ export const updateConsult = asyncHandler(async (req, res) => {
       { new: true }
     );
 
-    res.json(updatedConsult);
+    res.status(201).json(updatedConsult);
   } else {
     res.status(404);
     throw new Error("Consult not found");
@@ -98,7 +104,7 @@ export const deleteConsult = asyncHandler(async (req, res) => {
 
   if (consult) {
     await consult.remove();
-    res.json({ message: "Consult removed" });
+    res.status(204).json({ message: "Consult removed" });
   } else {
     res.status(404);
     throw new Error("Consult not found");

@@ -7,7 +7,7 @@ import Patient from "../models/patientModel.js";
 // @access  Private
 export const getPatients = asyncHandler(async (req, res) => {
   const patients = await Patient.find({});
-  res.json(patients);
+  res.status(200).json(patients);
 });
 
 // @desc    Get patient by ID
@@ -17,7 +17,7 @@ export const getPatientById = asyncHandler(async (req, res) => {
   const patient = await Patient.findById(req.params.id);
 
   if (patient) {
-    res.json(patient);
+    res.status(200).json(patient);
   } else {
     res.status(404);
     throw new Error("Patient not found");
@@ -51,7 +51,7 @@ export const updatePatient = asyncHandler(async (req, res) => {
       { new: true }
     );
 
-    res.json(updatedPatient);
+    res.status(201).json(updatedPatient);
   } else {
     res.status(404);
     throw new Error("Patient not found");
@@ -66,7 +66,7 @@ export const deletePatient = asyncHandler(async (req, res) => {
 
   if (patient) {
     await patient.remove();
-    res.json({ message: "Patient removed" });
+    res.status(204).json({ message: "Patient removed" });
   } else {
     res.status(404);
     throw new Error("Patient not found");
