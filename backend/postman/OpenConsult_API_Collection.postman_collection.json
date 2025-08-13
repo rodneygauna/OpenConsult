@@ -41,8 +41,14 @@
                   "if (pm.response.code === 201) {",
                   "    const responseJson = pm.response.json();",
                   "    if (responseJson.token) {",
+                  "        // Sets the token in both collection and environment variables",
                   "        pm.collectionVariables.set('token', responseJson.token);",
+                  "        pm.environment.set('token', responseJson.token);",
                   "        console.log('Token saved:', responseJson.token);",
+                  "        // Sets the userId in both collection and environment variables",
+                  "        pm.collectionVariables.set('userId', responseJson._id);",
+                  "        pm.environment.set('userId', responseJson._id);",
+                  "        console.log('User ID saved:', responseJson._id);",
                   "    }",
                   "}"
                 ],
@@ -80,11 +86,17 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "if (pm.response.code === 200) {",
+                  "if (pm.response.code === 201) {",
                   "    const responseJson = pm.response.json();",
                   "    if (responseJson.token) {",
+                  "        // Sets the token in both collection and environment variables",
                   "        pm.collectionVariables.set('token', responseJson.token);",
+                  "        pm.environment.set('token', responseJson.token);",
                   "        console.log('Token saved:', responseJson.token);",
+                  "        // Sets the userId in both collection and environment variables",
+                  "        pm.collectionVariables.set('userId', responseJson._id);",
+                  "        pm.environment.set('userId', responseJson._id);",
+                  "        console.log('User ID saved:', responseJson._id);",
                   "    }",
                   "}"
                 ],
