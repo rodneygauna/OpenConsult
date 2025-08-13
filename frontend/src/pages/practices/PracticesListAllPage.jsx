@@ -8,7 +8,15 @@ import { useNavigate } from "react-router";
 import { apiV1 } from "../../libs/axios";
 
 // Import React-Bootstrap Components
-import { Container, Row, Col, Card, Button, Alert } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Table,
+  Button,
+  ButtonGroup,
+  Alert,
+} from "react-bootstrap";
 
 // Import Components
 import NavbarComponent from "../../components/Navbar.jsx";
@@ -19,6 +27,36 @@ const PracticesListAllPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  // Helper function to format complete address
+  const formatAddress = (practice) => {
+    const parts = [
+      practice.address,
+      practice.suite_unit_number,
+      practice.city && practice.state
+        ? `${practice.city}, ${practice.state}`
+        : practice.city || practice.state,
+      practice.zip_code,
+    ].filter(Boolean);
+
+    return parts.join(", ");
+  };
+
+  // Helper function to format contact info
+  const formatContactInfo = (practice) => {
+    const contacts = [];
+    if (practice.phone_number) contacts.push(`Phone: ${practice.phone_number}`);
+    if (practice.fax_number) contacts.push(`Fax: ${practice.fax_number}`);
+    if (practice.email) contacts.push(`Email: ${practice.email}`);
+    return contacts;
+  };
+
+  // Helper function to format PO Box if exists
+  const formatPOBox = (practice) => {
+    return practice.po_box_address
+      ? `PO Box: ${practice.po_box_address}`
+      : null;
+  };
 
   // Fetch all practices on component mount
   useEffect(() => {
@@ -60,26 +98,71 @@ const PracticesListAllPage = () => {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <Row>
-            {practices.map((practice) => (
-              <Col key={practice.id} md={4}>
-                <Card className="mb-3">
-                  <Card.Body>
-                    <Card.Title>{practice.practice_name}</Card.Title>
-                    <Card.Text>{practice.address}</Card.Text>
-                    <Button
-                      variant="primary"
-                      onClick={() =>
-                        navigate(`/practices/edit/${practice._id}`)
-                      }
-                    >
-                      Edit Practice
-                    </Button>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
+          <Table striped bordered hover responsive>
+            <thead>
+              <tr>
+                <th>Practice Name</th>
+                <th>Address</th>
+                <th>Contact Information</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {practices.map((practice) => (
+                <tr key={practice._id}>
+                  <td>
+                    <strong>{practice.practice_name}</strong>
+                    {!practice.is_active && (
+                      <span className="badge bg-warning ms-2">Inactive</span>
+                    )}
+                  </td>
+                  <td>
+                    <div>{formatAddress(practice)}</div>
+                    {formatPOBox(practice) && (
+                      <div className="text-muted">
+                        <small>{formatPOBox(practice)}</small>
+                      </div>
+                    )}
+                  </td>
+                  <td>
+                    {formatContactInfo(practice).map((contact, index) => (
+                      <div key={index} className="text-muted">
+                        <small>{contact}</small>
+                      </div>
+                    ))}
+                  </td>
+                  <td>
+                    {practice.is_active ? (
+                      <span className="badge bg-success">Active</span>
+                    ) : (
+                      <span className="badge bg-warning">Inactive</span>
+                    )}
+                  </td>
+                  <td>
+                    <ButtonGroup size="sm">
+                      <Button
+                        variant="primary"
+                        onClick={() =>
+                          navigate(`/practices/view/${practice._id}`)
+                        }
+                      >
+                        View
+                      </Button>
+                      <Button
+                        variant="outline-primary"
+                        onClick={() =>
+                          navigate(`/practices/edit/${practice._id}`)
+                        }
+                      >
+                        Edit
+                      </Button>
+                    </ButtonGroup>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         )}
       </Container>
     </div>
