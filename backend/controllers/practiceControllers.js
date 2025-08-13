@@ -7,7 +7,7 @@ import Practice from "../models/practiceModel.js";
 // @access  Private
 export const getPractices = asyncHandler(async (req, res) => {
   const practices = await Practice.find({});
-  res.status(201).json(practices);
+  res.status(200).json(practices);
 });
 
 // @desc    Get all active practices
@@ -15,7 +15,7 @@ export const getPractices = asyncHandler(async (req, res) => {
 // @access  Private
 export const getActivePractices = asyncHandler(async (req, res) => {
   const practices = await Practice.find({ is_active: true });
-  res.status(201).json(practices);
+  res.status(200).json(practices);
 });
 
 // @desc    Get practice by ID
@@ -25,7 +25,7 @@ export const getPracticeById = asyncHandler(async (req, res) => {
   const practice = await Practice.findById(req.params.id);
 
   if (practice) {
-    res.status(201).json(practice);
+    res.status(200).json(practice);
   } else {
     res.status(404);
     throw new Error("Practice not found");
