@@ -47,6 +47,16 @@ const PracticesListAllPage = () => {
       <Container>
         <h1>All Practices</h1>
         {error && <Alert variant="danger">{error}</Alert>}
+        <Row className="mb-3">
+          <Col>
+            <Button
+              variant="primary"
+              onClick={() => navigate("/practices/add")}
+            >
+              Add Practice
+            </Button>
+          </Col>
+        </Row>
         {loading ? (
           <p>Loading...</p>
         ) : (
