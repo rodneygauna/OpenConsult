@@ -1,0 +1,568 @@
+{
+  "info": {
+    "name": "OpenConsult API",
+    "description": "Complete API collection for OpenConsult backend services",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const responseJson = pm.response.json();",
+                  "    if (responseJson.token) {",
+                  "        pm.collectionVariables.set('token', responseJson.token);",
+                  "        console.log('Token saved:', responseJson.token);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\",\n  \"phone_number\": 1234567890,\n  \"user_role\": \"Provider\",\n  \"user_type\": \"User\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const responseJson = pm.response.json();",
+                  "    if (responseJson.token) {",
+                  "        pm.collectionVariables.set('token', responseJson.token);",
+                  "        console.log('Token saved:', responseJson.token);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/auth",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "auth"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"John Updated\",\n  \"last_name\": \"Doe Updated\",\n  \"phone_number\": 9876543210\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/:userId",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", ":userId"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "replace_with_actual_user_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Practices",
+      "item": [
+        {
+          "name": "Get All Practices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/practices",
+              "host": ["{{baseUrl}}"],
+              "path": ["practices"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Practices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/practices/active",
+              "host": ["{{baseUrl}}"],
+              "path": ["practices", "active"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Practice",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"practice_name\": \"Downtown Medical Center\",\n  \"address\": \"123 Main Street\",\n  \"suite_unit_number\": \"Suite 200\",\n  \"city\": \"Springfield\",\n  \"state\": \"IL\",\n  \"zip_code\": 62701,\n  \"phone_number\": 2175551234,\n  \"fax_number\": 2175555678,\n  \"email\": \"info@downtownmedical.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/practices",
+              "host": ["{{baseUrl}}"],
+              "path": ["practices"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Practice by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/practices/:practiceId",
+              "host": ["{{baseUrl}}"],
+              "path": ["practices", ":practiceId"],
+              "variable": [
+                {
+                  "key": "practiceId",
+                  "value": "replace_with_actual_practice_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Practice",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"practice_name\": \"Downtown Medical Center - Updated\",\n  \"phone_number\": 2175559999\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/practices/:practiceId",
+              "host": ["{{baseUrl}}"],
+              "path": ["practices", ":practiceId"],
+              "variable": [
+                {
+                  "key": "practiceId",
+                  "value": "replace_with_actual_practice_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Practice",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/practices/:practiceId",
+              "host": ["{{baseUrl}}"],
+              "path": ["practices", ":practiceId"],
+              "variable": [
+                {
+                  "key": "practiceId",
+                  "value": "replace_with_actual_practice_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Patients",
+      "item": [
+        {
+          "name": "Get All Patients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/patients",
+              "host": ["{{baseUrl}}"],
+              "path": ["patients"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Smith\",\n  \"date_of_birth\": \"1985-06-15\",\n  \"mobile_number\": 5551234567,\n  \"email\": \"jane.smith@email.com\",\n  \"address\": \"456 Oak Avenue\",\n  \"city\": \"Springfield\",\n  \"state\": \"IL\",\n  \"zip_code\": 62702,\n  \"sex\": \"F\",\n  \"practice_id\": \"replace_with_actual_practice_id\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/patients",
+              "host": ["{{baseUrl}}"],
+              "path": ["patients"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Patient by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/patients/:patientId",
+              "host": ["{{baseUrl}}"],
+              "path": ["patients", ":patientId"],
+              "variable": [
+                {
+                  "key": "patientId",
+                  "value": "replace_with_actual_patient_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Patient",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobile_number\": 5559876543,\n  \"email\": \"jane.smith.updated@email.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/patients/:patientId",
+              "host": ["{{baseUrl}}"],
+              "path": ["patients", ":patientId"],
+              "variable": [
+                {
+                  "key": "patientId",
+                  "value": "replace_with_actual_patient_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Consults",
+      "item": [
+        {
+          "name": "Get All Consults",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consults",
+              "host": ["{{baseUrl}}"],
+              "path": ["consults"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Consult",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Draft\",\n  \"priority\": \"Routine\",\n  \"specialty\": \"Cardiology\",\n  \"chief_complaint\": \"Chest pain and shortness of breath\",\n  \"main_question\": \"Should patient be referred for cardiac catheterization?\",\n  \"comments_to_specialist\": \"Patient has been experiencing intermittent chest pain for 2 weeks\",\n  \"patient_id\": \"replace_with_actual_patient_id\",\n  \"practice_id\": \"replace_with_actual_practice_id\",\n  \"creating_provider_id\": \"replace_with_actual_user_id\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/consults",
+              "host": ["{{baseUrl}}"],
+              "path": ["consults"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Consult by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consults/:consultId",
+              "host": ["{{baseUrl}}"],
+              "path": ["consults", ":consultId"],
+              "variable": [
+                {
+                  "key": "consultId",
+                  "value": "replace_with_actual_consult_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Consult",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Ready for Review\",\n  \"priority\": \"Urgent\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/consults/:consultId",
+              "host": ["{{baseUrl}}"],
+              "path": ["consults", ":consultId"],
+              "variable": [
+                {
+                  "key": "consultId",
+                  "value": "replace_with_actual_consult_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Consult",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consults/:consultId",
+              "host": ["{{baseUrl}}"],
+              "path": ["consults", ":consultId"],
+              "variable": [
+                {
+                  "key": "consultId",
+                  "value": "replace_with_actual_consult_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Consults by Patient ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consults/patient/:patientId",
+              "host": ["{{baseUrl}}"],
+              "path": ["consults", "patient", ":patientId"],
+              "variable": [
+                {
+                  "key": "patientId",
+                  "value": "replace_with_actual_patient_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Consults by Provider ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consults/creating-provider/:providerId",
+              "host": ["{{baseUrl}}"],
+              "path": ["consults", "creating-provider", ":providerId"],
+              "variable": [
+                {
+                  "key": "providerId",
+                  "value": "replace_with_actual_user_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Consults by Specialist ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consults/assigned-specialist/:specialistId",
+              "host": ["{{baseUrl}}"],
+              "path": ["consults", "assigned-specialist", ":specialistId"],
+              "variable": [
+                {
+                  "key": "specialistId",
+                  "value": "replace_with_actual_user_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Consults by Practice ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consults/practice/:practiceId",
+              "host": ["{{baseUrl}}"],
+              "path": ["consults", "practice", ":practiceId"],
+              "variable": [
+                {
+                  "key": "practiceId",
+                  "value": "replace_with_actual_practice_id"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
