@@ -55,11 +55,8 @@ const NavbarComponent = () => {
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/about">
-              About
-            </Nav.Link>
-            <Nav.Link as={Link} to="/contact">
-              Contact
+            <Nav.Link as={Link} to="/practices">
+              Practices
             </Nav.Link>
           </Nav>
           <Nav className="justify-content-end">
