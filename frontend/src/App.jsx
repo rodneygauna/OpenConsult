@@ -1,12 +1,17 @@
 import { Route, Routes } from "react-router";
 
-// Import Pages
+/* Import Pages */
+// Home page
 import HomePage from "./pages/HomePage";
+// Login and registration pages
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+// Practice pages
 import PracticeAddPage from "./pages/practices/PracticeAddPage.jsx";
 import PracticesListAllPage from "./pages/practices/PracticesListAllPage.jsx";
 import PracticeEditPage from "./pages/practices/PracticeEditPage.jsx";
+// User pages
+import ProfileViewPage from "./pages/profile/ProfileViewPage";
 
 // App
 const App = () => {
@@ -24,6 +29,8 @@ const App = () => {
       <Route path="/practices" element={<PracticesListAllPage />} />
       {/* Practice Edit Page Route */}
       <Route path="/practices/edit/:id" element={<PracticeEditPage />} />
+      {/* User Profile Page Route */}
+      <Route path="/profile" element={<ProfileViewPage />} />
     </Routes>
   );
 };
