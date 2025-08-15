@@ -10,9 +10,6 @@ import { apiV1 } from "../../libs/axios";
 // Import React-Bootstrap Components
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 
-// Import Components
-import NavbarComponent from "../../components/Navbar.jsx";
-
 // PracticeAddPage Component
 const PracticeAddPage = () => {
   // Navigation hook
@@ -118,7 +115,6 @@ const PracticeAddPage = () => {
   // Render the component
   return (
     <div>
-      <NavbarComponent />
       <Container>
         <h1>Add a New Practice</h1>
         <p>This page allows you to add a new practice to OpenConsult.</p>

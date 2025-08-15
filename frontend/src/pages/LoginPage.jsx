@@ -13,9 +13,6 @@ import {
 // Import custom hooks
 import { useAuth } from "../hooks/useAuth";
 
-// Import custom components
-import NavbarComponent from "../components/Navbar";
-
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,7 +43,6 @@ const LoginPage = () => {
 
   return (
     <div>
-      <NavbarComponent />
       <Container>
         <Row className="justify-content-center">
           <Col md={6} lg={6}>

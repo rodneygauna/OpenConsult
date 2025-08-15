@@ -18,9 +18,6 @@ import {
   Alert,
 } from "react-bootstrap";
 
-// Import Components
-import NavbarComponent from "../../components/Navbar.jsx";
-
 // PracticesListAllPage Component
 const PracticesListAllPage = () => {
   const [practices, setPractices] = useState([]);
@@ -81,7 +78,6 @@ const PracticesListAllPage = () => {
 
   return (
     <div>
-      <NavbarComponent />
       <Container>
         <h1>All Practices</h1>
         {error && <Alert variant="danger">{error}</Alert>}

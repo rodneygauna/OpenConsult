@@ -14,7 +14,6 @@ import {
 
 // Import custom hooks and components
 import { useAuth } from "../hooks/useAuth";
-import NavbarComponent from "../components/Navbar";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -74,7 +73,6 @@ const RegisterPage = () => {
 
   return (
     <div>
-      <NavbarComponent />
       <Container>
         <Row className="justify-content-center">
           <Col md={8} lg={6}>

@@ -18,9 +18,6 @@ import {
   Button,
 } from "react-bootstrap";
 
-// Import Components
-import NavbarComponent from "../../components/Navbar.jsx";
-
 // ProfileViewPage Component
 const ProfileViewPage = () => {
   // State for user data
@@ -90,7 +87,6 @@ const ProfileViewPage = () => {
 
   return (
     <div>
-      <NavbarComponent />
       <Container className="mt-4">
         <Row>
           <Col>
