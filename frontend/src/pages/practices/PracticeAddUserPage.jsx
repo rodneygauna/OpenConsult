@@ -41,17 +41,6 @@ const PracticeAddUserPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Generate a random password
-  const generateRandomPassword = () => {
-    const chars =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-    let password = "";
-    for (let i = 0; i < 12; i++) {
-      password += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return password;
-  };
-
   // Fetch practice information
   const fetchPracticeInfo = async () => {
     try {
@@ -98,13 +87,9 @@ const PracticeAddUserPage = () => {
     setLoading(true);
 
     try {
-      // Generate random password
-      const generatedPassword = generateRandomPassword();
-
       // Prepare user data
       const userData = { ...formData };
       userData.practice_id = id; // Assign to current practice
-      userData.password_hash = generatedPassword; // Backend will hash this
 
       // Create user
       const response = await apiV1.post("/users", userData, {
@@ -115,7 +100,7 @@ const PracticeAddUserPage = () => {
       });
 
       setSuccess(
-        `User ${userData.first_name} ${userData.last_name} has been successfully added to the practice! A temporary password has been generated and will be sent via email.`
+        `User ${userData.first_name} ${userData.last_name} has been successfully added to the practice! A welcome email with login credentials has been sent to ${userData.email}.`
       );
 
       // Reset form
