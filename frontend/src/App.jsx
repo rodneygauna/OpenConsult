@@ -13,6 +13,7 @@ import PracticeAddPage from "./pages/practices/PracticeAddPage.jsx";
 import PracticesListAllPage from "./pages/practices/PracticesListAllPage.jsx";
 import PracticeEditPage from "./pages/practices/PracticeEditPage.jsx";
 import PracticeViewPage from "./pages/practices/PracticeViewPage.jsx";
+import PracticeAddUserPage from "./pages/practices/PracticeAddUserPage.jsx";
 // User pages
 import ProfileViewPage from "./pages/profile/ProfileViewPage";
 
@@ -36,6 +37,11 @@ const App = () => {
         <Route path="/practices/edit/:id" element={<PracticeEditPage />} />
         {/* Practice View Page Route */}
         <Route path="/practices/view/:id" element={<PracticeViewPage />} />
+        {/* Practice Add User Page Route */}
+        <Route
+          path="/practices/add-user/:id"
+          element={<PracticeAddUserPage />}
+        />
         {/* User Profile Page Route */}
         <Route path="/profile" element={<ProfileViewPage />} />
       </Route>
