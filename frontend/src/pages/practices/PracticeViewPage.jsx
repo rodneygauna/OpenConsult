@@ -15,6 +15,7 @@ import {
   Badge,
   Alert,
   Spinner,
+  Table,
   Button,
   ListGroup,
   ButtonGroup,
@@ -25,6 +26,7 @@ const PracticeViewPage = () => {
   const { id } = useParams();
   // State for practice data
   const [practice, setPractice] = useState(null);
+  const [practiceUsers, setPracticeUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -60,6 +62,28 @@ const PracticeViewPage = () => {
       )}`;
     }
     return phoneStr; // Return as-is if not 10 digits
+  };
+
+  // Helper function to format user's full name
+  const formatUserFullName = (user) => {
+    const parts = [
+      user.first_name,
+      user.middle_name,
+      user.last_name,
+      user.suffix,
+    ].filter(Boolean);
+    return parts.join(" ");
+  };
+
+  // Helper function to get role badge variant
+  const getRoleBadgeVariant = (role) => {
+    const variants = {
+      Admin: "danger",
+      Provider: "primary",
+      Specialist: "success",
+      Staff: "secondary",
+    };
+    return variants[role] || "secondary";
   };
 
   // Helper function to format date
@@ -100,8 +124,35 @@ const PracticeViewPage = () => {
     }
   };
 
+  // Fetch the users for the practice
+  const fetchPracticeUsers = async () => {
+    if (!id) {
+      setError("Invalid practice ID.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await apiV1.get(`/practices/${id}/users`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      setPracticeUsers(response.data);
+    } catch (error) {
+      console.error("Error fetching practice users:", error);
+      setError(
+        error.response?.data?.message ||
+          "Failed to load practice users. Please try again later."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchPracticeInformation();
+    fetchPracticeUsers();
   }, [id]);
 
   // Return the component
@@ -253,6 +304,92 @@ const PracticeViewPage = () => {
                         </ListGroup.Item>
                       )}
                     </ListGroup>
+                  </Card.Body>
+                </Card>
+
+                {/* Users List */}
+                <Card className="mb-4">
+                  <Card.Header>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <h5 className="mb-0">
+                        <i className="bi bi-person-circle"></i> Practice Users (
+                        {practiceUsers.length})
+                      </h5>
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        onClick={() =>
+                          navigate(`/practices/add-user/${practice._id}`)
+                        }
+                      >
+                        <i className="bi bi-person-plus"></i> Add User
+                      </Button>
+                    </div>
+                  </Card.Header>
+                  <Card.Body>
+                    {practiceUsers.length === 0 ? (
+                      <Alert variant="info">
+                        No users are currently associated with this practice.
+                      </Alert>
+                    ) : (
+                      <Table striped bordered hover responsive>
+                        <thead>
+                          <tr>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Member Since</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {practiceUsers.map((user) => (
+                            <tr key={user._id}>
+                              <td>
+                                <strong>{formatUserFullName(user)}</strong>
+                                {user.suffix && (
+                                  <small className="text-muted d-block">
+                                    {user.suffix}
+                                  </small>
+                                )}
+                              </td>
+                              <td>
+                                <a href={`mailto:${user.email}`}>
+                                  {user.email}
+                                </a>
+                              </td>
+                              <td>
+                                <a href={`tel:${user.phone_number}`}>
+                                  {formatPhoneNumber(user.phone_number)}
+                                </a>
+                              </td>
+                              <td>
+                                <Badge bg={getRoleBadgeVariant(user.user_role)}>
+                                  {user.user_role}
+                                </Badge>
+                              </td>
+                              <td>
+                                <Badge
+                                  bg={getUserTypeBadgeVariant(user.user_type)}
+                                >
+                                  {user.user_type}
+                                </Badge>
+                              </td>
+                              <td>
+                                <Badge
+                                  bg={user.is_active ? "success" : "danger"}
+                                >
+                                  {user.is_active ? "Active" : "Inactive"}
+                                </Badge>
+                              </td>
+                              <td>{formatDate(user.createdAt)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </Table>
+                    )}
                   </Card.Body>
                 </Card>
 

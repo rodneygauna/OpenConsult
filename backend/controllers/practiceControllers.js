@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 
 import Practice from "../models/practiceModel.js";
+import User from "../models/userModel.js";
 
 // @desc    Get all practices
 // @route   GET /api/v1/practices
@@ -30,6 +31,26 @@ export const getPracticeById = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Practice not found");
   }
+});
+
+// @desc    Get all users for a practice
+// @route   GET /api/v1/practices/:id/users
+// @access  Private
+export const getUsersForPractice = asyncHandler(async (req, res) => {
+  // First check if the practice exists
+  const practice = await Practice.findById(req.params.id);
+
+  if (!practice) {
+    res.status(404);
+    throw new Error("Practice not found");
+  }
+
+  // Find all users that belong to this practice, excluding password_hash
+  const users = await User.find({ practice_id: req.params.id }).select(
+    "-password_hash"
+  );
+
+  res.status(200).json(users);
 });
 
 // @desc    Create new practice

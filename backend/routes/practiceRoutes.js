@@ -4,6 +4,7 @@ import {
   getPractices,
   getActivePractices,
   getPracticeById,
+  getUsersForPractice,
   createPractice,
   updatePractice,
   deletePractice,
@@ -20,5 +21,6 @@ router
   .get(protect, getPracticeById)
   .put(protect, updatePractice)
   .delete(protect, deletePractice);
+router.get("/:id/users", protect, getUsersForPractice);
 
 export default router;
