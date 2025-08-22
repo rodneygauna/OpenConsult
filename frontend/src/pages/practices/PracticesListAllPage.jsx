@@ -105,58 +105,67 @@ const PracticesListAllPage = () => {
               </tr>
             </thead>
             <tbody>
-              {practices.map((practice) => (
-                <tr key={practice._id}>
-                  <td>
-                    <strong>{practice.practice_name}</strong>
-                    {!practice.is_active && (
-                      <span className="badge bg-warning ms-2">Inactive</span>
-                    )}
-                  </td>
-                  <td>
-                    <div>{formatAddress(practice)}</div>
-                    {formatPOBox(practice) && (
-                      <div className="text-muted">
-                        <small>{formatPOBox(practice)}</small>
-                      </div>
-                    )}
-                  </td>
-                  <td>
-                    {formatContactInfo(practice).map((contact, index) => (
-                      <div key={index} className="text-muted">
-                        <small>{contact}</small>
-                      </div>
-                    ))}
-                  </td>
-                  <td>
-                    {practice.is_active ? (
-                      <span className="badge bg-success">Active</span>
-                    ) : (
-                      <span className="badge bg-warning">Inactive</span>
-                    )}
-                  </td>
-                  <td>
-                    <ButtonGroup size="sm">
-                      <Button
-                        variant="primary"
-                        onClick={() =>
-                          navigate(`/practices/view/${practice._id}`)
-                        }
-                      >
-                        View
-                      </Button>
-                      <Button
-                        variant="outline-primary"
-                        onClick={() =>
-                          navigate(`/practices/edit/${practice._id}`)
-                        }
-                      >
-                        Edit
-                      </Button>
-                    </ButtonGroup>
+              {practices.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="text-center">
+                    No practices found. Try adding a new practice by clicking
+                    the "Add Practice" button.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                practices.map((practice) => (
+                  <tr key={practice._id}>
+                    <td>
+                      <strong>{practice.practice_name}</strong>
+                      {!practice.is_active && (
+                        <span className="badge bg-warning ms-2">Inactive</span>
+                      )}
+                    </td>
+                    <td>
+                      <div>{formatAddress(practice)}</div>
+                      {formatPOBox(practice) && (
+                        <div className="text-muted">
+                          <small>{formatPOBox(practice)}</small>
+                        </div>
+                      )}
+                    </td>
+                    <td>
+                      {formatContactInfo(practice).map((contact, index) => (
+                        <div key={index} className="text-muted">
+                          <small>{contact}</small>
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {practice.is_active ? (
+                        <span className="badge bg-success">Active</span>
+                      ) : (
+                        <span className="badge bg-warning">Inactive</span>
+                      )}
+                    </td>
+                    <td>
+                      <ButtonGroup size="sm">
+                        <Button
+                          variant="primary"
+                          onClick={() =>
+                            navigate(`/practices/view/${practice._id}`)
+                          }
+                        >
+                          View
+                        </Button>
+                        <Button
+                          variant="outline-primary"
+                          onClick={() =>
+                            navigate(`/practices/edit/${practice._id}`)
+                          }
+                        >
+                          Edit
+                        </Button>
+                      </ButtonGroup>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </Table>
         )}

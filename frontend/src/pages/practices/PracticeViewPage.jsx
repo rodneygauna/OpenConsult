@@ -86,6 +86,16 @@ const PracticeViewPage = () => {
     return variants[role] || "secondary";
   };
 
+  // Helper function to get user type badge variant
+  const getUserTypeBadgeVariant = (userType) => {
+    const variants = {
+      Patient: "info",
+      Provider: "primary",
+      Admin: "danger",
+    };
+    return variants[userType] || "secondary";
+  };
+
   // Helper function to format date
   const formatDate = (dateString) => {
     if (!dateString) return null;
@@ -349,11 +359,6 @@ const PracticeViewPage = () => {
                             <tr key={user._id}>
                               <td>
                                 <strong>{formatUserFullName(user)}</strong>
-                                {user.suffix && (
-                                  <small className="text-muted d-block">
-                                    {user.suffix}
-                                  </small>
-                                )}
                               </td>
                               <td>
                                 <a href={`mailto:${user.email}`}>
